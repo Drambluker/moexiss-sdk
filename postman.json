@@ -1,0 +1,2237 @@
+{
+	"info": {
+		"_postman_id": "2d0c94cb-7409-4ff4-bd0c-1f23b6d9b039",
+		"name": "Информационно-статистический сервер Московской Биржи (ИСС / ISS)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Securities",
+			"item": [
+				{
+					"name": "Список бумаг торгуемых на московской бирже (https://iss.moex.com/iss/reference/5)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/securities.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"securities.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "100",
+									"description": "Количество выводимых инструментов (5, 10, 20,100)\n\nDefault: 100\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "q",
+									"value": null,
+									"description": "Поиск инструмента по части Кода, Названию, ISIN, Идентификатору Эмитента, Номеру гос.регистрации.\nНапример: https://iss.moex.com/iss/securities.xml?q=MOEX\nСлова длиной менее трёх букв игнорируются. Если параметром передано два слова через пробел. То каждое должно быть длиной не менее трёх букв.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "engine",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "market",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "is_trading",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "group_by",
+									"value": null,
+									"description": "Группировать выводимый результат по полю. Доступны значения group и type.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "group_by_filter",
+									"value": null,
+									"description": "Фильтровать по типам group или type.\nЗависит от значения фильтра group_by\n\nDefault:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить спецификацию инструмента (https://iss.moex.com/iss/reference/13)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/securities/{{security}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"securities",
+								"{{security}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "description,boards",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "description.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "boards.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "boards.start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Список индексов в которые входит бумага (https://iss.moex.com/iss/reference/160)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/securities/{{security}}/indices.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"securities",
+								"{{security}}",
+								"indices.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "only_actual",
+									"value": "0",
+									"description": "Выводить индексы в базе которого бумага находится прямо сейчас.\n\nDefault: 0\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Statistics",
+			"item": [
+				{
+					"name": "Индексы фондового рынка (https://iss.moex.com/iss/reference/146)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"statistics",
+								"engines",
+								"stock",
+								"markets",
+								"index",
+								"analytics.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "security_collection",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Аналитические показатели за дату (https://iss.moex.com/iss/reference/147)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics/{{index}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"statistics",
+								"engines",
+								"stock",
+								"markets",
+								"index",
+								"analytics",
+								"{{index}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "analytics,analytics.cursor,analytics.dates",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								},
+								{
+									"key": "analytics.start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								},
+								{
+									"key": "analytics.cursor.start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "20",
+									"description": "Количество выводимых бумаг (20,100)\n\nDefault: 20\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.limit",
+									"value": "20",
+									"description": "Количество выводимых бумаг (20,100)\n\nDefault: 20\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.cursor.limit",
+									"value": "20",
+									"description": "Количество выводимых бумаг (20,100)\n\nDefault: 20\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.cursor.tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "date",
+									"value": "today",
+									"description": "Дата за которую необходимо вывести данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: today\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.date",
+									"value": "today",
+									"description": "Дата за которую необходимо вывести данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: today\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.cursor.date",
+									"value": "today",
+									"description": "Дата за которую необходимо вывести данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: today\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "tickers",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.tickers",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "analytics.cursor.tickers",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Список тикеров за все время торгов (https://iss.moex.com/iss/reference/148)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics/{{index}}/tickers.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"statistics",
+								"engines",
+								"stock",
+								"markets",
+								"index",
+								"analytics",
+								"{{index}}",
+								"tickers.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "date",
+									"value": null,
+									"description": "Показывать тикеры за конкретную дату\n\nDefault:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Информация по тикеру (https://iss.moex.com/iss/reference/149)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics/{{index}}/tickers/{{ticker}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"statistics",
+								"engines",
+								"stock",
+								"markets",
+								"index",
+								"analytics",
+								"{{index}}",
+								"tickers",
+								"{{ticker}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "ticker,ticker.cursor",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "ticker.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "ticker.tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "ticker.cursor.tradingsession",
+									"value": "3",
+									"description": "Показать данные только за необходимую сессию\n1 - Основная\n2 - Вечерняя\n3 - Итого (по умолчанию)\n\nDefault: 3\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								},
+								{
+									"key": "ticker.start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								},
+								{
+									"key": "ticker.cursor.start",
+									"value": "0",
+									"description": "Номер строки (отсчет с нуля), с которой следует начать порцию возвращаемых данных (см. рук-во разработчика).\nПолучение ответа без данных означает, что указанное значение превышает число строк, возвращаемых запросом.\n\nDefault: 0\nType: number",
+									"disabled": true
+								},
+								{
+									"key": "from",
+									"value": "1900-01-01",
+									"description": "Дата, начиная с которой необходимо начать выводить данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: 1900-01-01\nType: string",
+									"disabled": true
+								},
+								{
+									"key": "ticker.from",
+									"value": "1900-01-01",
+									"description": "Дата, начиная с которой необходимо начать выводить данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: 1900-01-01\nType: string",
+									"disabled": true
+								},
+								{
+									"key": "ticker.cursor.from",
+									"value": "1900-01-01",
+									"description": "Дата, начиная с которой необходимо начать выводить данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: 1900-01-01\nType: string",
+									"disabled": true
+								},
+								{
+									"key": "till",
+									"value": "1900-01-01",
+									"description": "Дата, до которой выводить данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: 1900-01-01\nType: string",
+									"disabled": true
+								},
+								{
+									"key": "ticker.till",
+									"value": "1900-01-01",
+									"description": "Дата, до которой выводить данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: 1900-01-01\nType: string",
+									"disabled": true
+								},
+								{
+									"key": "ticker.cursor.till",
+									"value": "1900-01-01",
+									"description": "Дата, до которой выводить данные. Формат: ГГГГ-ММ-ДД.\n\nDefault: 1900-01-01\nType: string",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Engines",
+			"item": [
+				{
+					"name": "Список доступных торговых систем (https://iss.moex.com/iss/reference/40)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить описание и режим работы торговой системы (https://iss.moex.com/iss/reference/41)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "engine,timetable,dailytable",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "engine.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Справочник доступных рынков и их атрибуты (https://iss.moex.com/iss/reference/42)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить описание: словарь доступных режимов торгов, описание полей публикуемых таблиц данных и т.д. (https://iss.moex.com/iss/reference/44)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets",
+								"{{market}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "boards,boardgroups,securities,marketdata,trades,orderbook,history,trades_hist,marketdata_yields,trades_yields,history_yields,secstats",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "boards.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "boardgroups.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "trades.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "orderbook.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "history.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "trades_hist.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "trades_yields.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "history_yields.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "secstats.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить таблицу инструментов торговой сессии по рынку в целом (https://iss.moex.com/iss/reference/33)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/securities.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets",
+								"{{market}}",
+								"securities.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "securities,marketdata,dataversion,marketdata_yields",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить данные по конкретному инструменту рынка (https://iss.moex.com/iss/reference/52)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/securities/{{security}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets",
+								"{{market}}",
+								"securities",
+								"{{security}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "securities,marketdata,dataversion,marketdata_yields",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить справочник режимов торгов рынка (https://iss.moex.com/iss/reference/43)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets",
+								"{{market}}",
+								"boards.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить описание режима торгов (https://iss.moex.com/iss/reference/49)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards/{{board}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets",
+								"{{market}}",
+								"boards",
+								"{{board}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить таблицу инструментов по режиму торгов (https://iss.moex.com/iss/reference/32)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards/{{board}}/securities.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets",
+								"{{market}}",
+								"boards",
+								"{{board}}",
+								"securities.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "securities,marketdata,dataversion,marketdata_yields",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Получить данные по указанному инструменту на выбранном режиме торгов (https://iss.moex.com/iss/reference/53)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards/{{board}}/securities/{{security}}.json",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"iss",
+								"engines",
+								"{{engine}}",
+								"markets",
+								"{{market}}",
+								"boards",
+								"{{board}}",
+								"securities",
+								"{{security}}.json"
+							],
+							"query": [
+								{
+									"key": "iss.meta",
+									"value": "off",
+									"disabled": true
+								},
+								{
+									"key": "iss.only",
+									"value": "securities,marketdata,dataversion,marketdata_yields",
+									"disabled": true
+								},
+								{
+									"key": "lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.lang",
+									"value": "ru",
+									"description": "Язык результата: ru или en\n\nDefault: ru\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.first",
+									"value": "0",
+									"description": "Отдать n первых строк\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_column",
+									"value": null,
+									"description": "Default:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sort_order",
+									"value": "asc",
+									"description": "Default: asc\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.leaders",
+									"value": "0",
+									"description": "Лидеры торгов (только для futures/options)\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.nearest",
+									"value": "0",
+									"description": "Выводить фьючерсы с ближайшей датой погашения\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.previous_session",
+									"value": "0",
+									"description": "Данные предыдущей сессии для forts и options рынков\n\nDefault: 0\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.primary_board",
+									"value": null,
+									"description": "Показывать инструменты - только для главного режима торгов по бумаге.\nФильтр работает только для фондового (stock) и валютного (currency) рынка.\nБудьте осторожны используя данный фильтр за пределами основных режимов торгов.\nСписок главных режимов торгов: https://iss.moex.com/iss/securities/ колонка \"primary_boardid\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.assets",
+									"value": null,
+									"description": "Фильтр по коду базового актива (только для срочного рынка). Колонка ASSETCODE.\nПример: https://iss.moex.com/iss/engines/futures/markets/forts/securities?assets=EURRUBTOM,AFLT\nОграничения: не более 5 типов бумаг.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.index",
+									"value": null,
+									"description": "Выводить акции из базы индекса.\nТолько для фондового рынка.\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.securities",
+									"value": null,
+									"description": "Фильтр-список инструментов. Получение данных производится только по инстурментам из списка securities. Например: securities=GAZP,AFLT,LKOH (не более 10 инструментов).\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "marketdata_yields.sectypes",
+									"value": null,
+									"description": "Фильтр по типу инструмента (только для срочного и фондового рынков).\nНапример:\n- https://iss.moex.com/iss/engines/futures/markets/forts/securities?sectypes=ri,gz\n- https://iss.moex.com/iss/engines/stock/markets/bonds/securities?sectypes=8\nОграничения: не более 5 типов бумаг.\n!! Для срочного рынка устарело. Используйте фильтр \"assets\".\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								},
+								{
+									"key": "securities.security_collection",
+									"value": null,
+									"description": "Фильтр по коллекции\n\nDefault:\nType: var",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://iss.moex.com",
+			"type": "default"
+		},
+		{
+			"key": "security",
+			"value": "YNDX",
+			"type": "default"
+		},
+		{
+			"key": "index",
+			"value": "IMOEX",
+			"type": "default"
+		},
+		{
+			"key": "ticker",
+			"value": "YNDX",
+			"type": "default"
+		},
+		{
+			"key": "engine",
+			"value": "stock",
+			"type": "default"
+		},
+		{
+			"key": "market",
+			"value": "shares",
+			"type": "default"
+		},
+		{
+			"key": "board",
+			"value": "TQBR",
+			"type": "default"
+		}
+	]
+}

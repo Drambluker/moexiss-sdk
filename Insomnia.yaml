@@ -1,0 +1,1292 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1763836978585
+  modified: 1763836978585
+  description: ""
+collection:
+  - name: Информационно-статистический сервер Московской Биржи (ИСС / ISS)
+    meta:
+      id: fld_9c1f2be5cff74d3da3b847bed9cb5aae
+      created: 1763844901585
+      modified: 1763844901585
+      sortKey: -1763844900154
+      description: ""
+    children:
+      - name: Securities
+        meta:
+          id: fld_0b774c881a5d4b21a44e3f373715b25b
+          created: 1763844901587
+          modified: 1763844901587
+          sortKey: -1763844900153
+          description: ""
+        children:
+          - url: "{{baseUrl}}/iss/securities.json"
+            name: Список бумаг торгуемых на московской бирже
+              (https://iss.moex.com/iss/reference/5)
+            meta:
+              id: req_8a4e0943e7fe407bac3a7b154d755c20
+              created: 1763844901588
+              modified: 1763844901588
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900152
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: start
+                value: "0"
+                disabled: true
+              - name: limit
+                value: "100"
+                disabled: true
+              - name: q
+                value: ""
+                disabled: true
+              - name: engine
+                value: ""
+                disabled: true
+              - name: market
+                value: ""
+                disabled: true
+              - name: is_trading
+                value: ""
+                disabled: true
+              - name: group_by
+                value: ""
+                disabled: true
+              - name: group_by_filter
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/securities/{{security}}.json"
+            name: Получить спецификацию инструмента (https://iss.moex.com/iss/reference/13)
+            meta:
+              id: req_5fb5630f43bd4127a41339ec65e8dbd2
+              created: 1763844901589
+              modified: 1763844901589
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900151
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: description,boards
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: description.lang
+                value: ru
+                disabled: true
+              - name: boards.lang
+                value: ru
+                disabled: true
+              - name: boards.start
+                value: "0"
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/securities/{{security}}/indices.json"
+            name: Список индексов в которые входит бумага
+              (https://iss.moex.com/iss/reference/160)
+            meta:
+              id: req_c05f06954c624bcf96f393a0aca937a0
+              created: 1763844901590
+              modified: 1763844901590
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900150
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: only_actual
+                value: "0"
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Statistics
+        meta:
+          id: fld_9574d24f11cf4fe5bc8b878646bebfe9
+          created: 1763844901590
+          modified: 1763844901590
+          sortKey: -1763844900149
+          description: ""
+        children:
+          - url: "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics/{{index}\
+              }.json"
+            name: Аналитические показатели за дату (https://iss.moex.com/iss/reference/147)
+            meta:
+              id: req_204719f5b3d241d7a8904cedbbad8036
+              created: 1763844901591
+              modified: 1763844901591
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900147
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: analytics,analytics.cursor,analytics.dates
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: analytics.lang
+                value: ru
+                disabled: true
+              - name: start
+                value: "0"
+                disabled: true
+              - name: analytics.start
+                value: "0"
+                disabled: true
+              - name: analytics.cursor.start
+                value: "0"
+                disabled: true
+              - name: limit
+                value: "20"
+                disabled: true
+              - name: analytics.limit
+                value: "20"
+                disabled: true
+              - name: analytics.cursor.limit
+                value: "20"
+                disabled: true
+              - name: tradingsession
+                value: "3"
+                disabled: true
+              - name: analytics.tradingsession
+                value: "3"
+                disabled: true
+              - name: analytics.cursor.tradingsession
+                value: "3"
+                disabled: true
+              - name: date
+                value: today
+                disabled: true
+              - name: analytics.date
+                value: today
+                disabled: true
+              - name: analytics.cursor.date
+                value: today
+                disabled: true
+              - name: tickers
+                value: ""
+                disabled: true
+              - name: analytics.tickers
+                value: ""
+                disabled: true
+              - name: analytics.cursor.tickers
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics.json"
+            name: Индексы фондового рынка (https://iss.moex.com/iss/reference/146)
+            meta:
+              id: req_6ca1a6f9e7f64c16bdd2d1db329e451c
+              created: 1763844901591
+              modified: 1763844901591
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900148
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: tradingsession
+                value: "3"
+                disabled: true
+              - name: security_collection
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics/{{index}\
+              }/tickers/{{ticker}}.json"
+            name: Информация по тикеру (https://iss.moex.com/iss/reference/149)
+            meta:
+              id: req_bfecc9e646cb4c5e99fbf6c6d2851312
+              created: 1763844901592
+              modified: 1763844901592
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900145
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: ticker,ticker.cursor
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: ticker.lang
+                value: ru
+                disabled: true
+              - name: tradingsession
+                value: "3"
+                disabled: true
+              - name: ticker.tradingsession
+                value: "3"
+                disabled: true
+              - name: ticker.cursor.tradingsession
+                value: "3"
+                disabled: true
+              - name: start
+                value: "0"
+                disabled: true
+              - name: ticker.start
+                value: "0"
+                disabled: true
+              - name: ticker.cursor.start
+                value: "0"
+                disabled: true
+              - name: from
+                value: 1900-01-01
+                disabled: true
+              - name: ticker.from
+                value: 1900-01-01
+                disabled: true
+              - name: ticker.cursor.from
+                value: 1900-01-01
+                disabled: true
+              - name: till
+                value: 1900-01-01
+                disabled: true
+              - name: ticker.till
+                value: 1900-01-01
+                disabled: true
+              - name: ticker.cursor.till
+                value: 1900-01-01
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/statistics/engines/stock/markets/index/analytics/{{index}\
+              }/tickers.json"
+            name: Список тикеров за все время торгов
+              (https://iss.moex.com/iss/reference/148)
+            meta:
+              id: req_e1d5c6d91ffe43f298cb220ba562227f
+              created: 1763844901592
+              modified: 1763844901592
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900146
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: tradingsession
+                value: "3"
+                disabled: true
+              - name: date
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+      - name: Engines
+        meta:
+          id: fld_08eb55ce0cc0494da651d7004fc418b7
+          created: 1763844901593
+          modified: 1763844901593
+          sortKey: -1763844900144
+          description: ""
+        children:
+          - url: "{{baseUrl}}/iss/engines.json"
+            name: Список доступных торговых систем (https://iss.moex.com/iss/reference/40)
+            meta:
+              id: req_f07e23e1d459441ba2739fdfa14a49e1
+              created: 1763844901593
+              modified: 1763844901593
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900143
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets.json"
+            name: Справочник доступных рынков и их атрибуты
+              (https://iss.moex.com/iss/reference/42)
+            meta:
+              id: req_29f2ec40f1bf4c08b8e1daf58807ef7c
+              created: 1763844901594
+              modified: 1763844901594
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900141
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}.json"
+            name: Получить описание и режим работы торговой системы
+              (https://iss.moex.com/iss/reference/41)
+            meta:
+              id: req_84191981d3f548e2b29d652227406c94
+              created: 1763844901594
+              modified: 1763844901594
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900142
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: engine,timetable,dailytable
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: engine.lang
+                value: ru
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}.json"
+            name: "Получить описание: словарь доступных режимов торгов, описание полей
+              публикуемых таблиц данных и т.д.
+              (https://iss.moex.com/iss/reference/44)"
+            meta:
+              id: req_7bcc2aec40474aae983c045543d209ca
+              created: 1763844901595
+              modified: 1763844901595
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900140
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: boards,boardgroups,securities,marketdata,trades,orderbook,history,trades_hist,marketdata_yields,trades_yields,history_yields,secstats
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: boards.lang
+                value: ru
+                disabled: true
+              - name: boardgroups.lang
+                value: ru
+                disabled: true
+              - name: securities.lang
+                value: ru
+                disabled: true
+              - name: marketdata.lang
+                value: ru
+                disabled: true
+              - name: trades.lang
+                value: ru
+                disabled: true
+              - name: orderbook.lang
+                value: ru
+                disabled: true
+              - name: history.lang
+                value: ru
+                disabled: true
+              - name: trades_hist.lang
+                value: ru
+                disabled: true
+              - name: marketdata_yields.lang
+                value: ru
+                disabled: true
+              - name: trades_yields.lang
+                value: ru
+                disabled: true
+              - name: history_yields.lang
+                value: ru
+                disabled: true
+              - name: secstats.lang
+                value: ru
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/securities.json"
+            name: Получить таблицу инструментов торговой сессии по рынку в целом
+              (https://iss.moex.com/iss/reference/33)
+            meta:
+              id: req_9e970215940347ad850f261695ecf28e
+              created: 1763844901595
+              modified: 1763844901595
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900139
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: securities,marketdata,dataversion,marketdata_yields
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: securities.lang
+                value: ru
+                disabled: true
+              - name: marketdata.lang
+                value: ru
+                disabled: true
+              - name: marketdata_yields.lang
+                value: ru
+                disabled: true
+              - name: first
+                value: "0"
+                disabled: true
+              - name: securities.first
+                value: "0"
+                disabled: true
+              - name: marketdata.first
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.first
+                value: "0"
+                disabled: true
+              - name: sort_column
+                value: ""
+                disabled: true
+              - name: securities.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sort_column
+                value: ""
+                disabled: true
+              - name: sort_order
+                value: asc
+                disabled: true
+              - name: securities.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata_yields.sort_order
+                value: asc
+                disabled: true
+              - name: leaders
+                value: "0"
+                disabled: true
+              - name: securities.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.leaders
+                value: "0"
+                disabled: true
+              - name: nearest
+                value: "0"
+                disabled: true
+              - name: securities.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.nearest
+                value: "0"
+                disabled: true
+              - name: previous_session
+                value: "0"
+                disabled: true
+              - name: securities.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.previous_session
+                value: "0"
+                disabled: true
+              - name: primary_board
+                value: ""
+                disabled: true
+              - name: securities.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata_yields.primary_board
+                value: ""
+                disabled: true
+              - name: assets
+                value: ""
+                disabled: true
+              - name: securities.assets
+                value: ""
+                disabled: true
+              - name: marketdata.assets
+                value: ""
+                disabled: true
+              - name: marketdata_yields.assets
+                value: ""
+                disabled: true
+              - name: index
+                value: ""
+                disabled: true
+              - name: securities.index
+                value: ""
+                disabled: true
+              - name: marketdata.index
+                value: ""
+                disabled: true
+              - name: marketdata_yields.index
+                value: ""
+                disabled: true
+              - name: securities
+                value: ""
+                disabled: true
+              - name: securities.securities
+                value: ""
+                disabled: true
+              - name: marketdata.securities
+                value: ""
+                disabled: true
+              - name: marketdata_yields.securities
+                value: ""
+                disabled: true
+              - name: sectypes
+                value: ""
+                disabled: true
+              - name: securities.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sectypes
+                value: ""
+                disabled: true
+              - name: security_collection
+                value: ""
+                disabled: true
+              - name: securities.security_collection
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/securities/{{securi\
+              ty}}.json"
+            name: Получить данные по конкретному инструменту рынка
+              (https://iss.moex.com/iss/reference/52)
+            meta:
+              id: req_42016d2fd4164898b0dff624dcce1fad
+              created: 1763844901596
+              modified: 1763844901596
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900138
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: securities,marketdata,dataversion,marketdata_yields
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: securities.lang
+                value: ru
+                disabled: true
+              - name: marketdata.lang
+                value: ru
+                disabled: true
+              - name: marketdata_yields.lang
+                value: ru
+                disabled: true
+              - name: first
+                value: "0"
+                disabled: true
+              - name: securities.first
+                value: "0"
+                disabled: true
+              - name: marketdata.first
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.first
+                value: "0"
+                disabled: true
+              - name: sort_column
+                value: ""
+                disabled: true
+              - name: securities.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sort_column
+                value: ""
+                disabled: true
+              - name: sort_order
+                value: asc
+                disabled: true
+              - name: securities.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata_yields.sort_order
+                value: asc
+                disabled: true
+              - name: leaders
+                value: "0"
+                disabled: true
+              - name: securities.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.leaders
+                value: "0"
+                disabled: true
+              - name: nearest
+                value: "0"
+                disabled: true
+              - name: securities.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.nearest
+                value: "0"
+                disabled: true
+              - name: previous_session
+                value: "0"
+                disabled: true
+              - name: securities.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.previous_session
+                value: "0"
+                disabled: true
+              - name: primary_board
+                value: ""
+                disabled: true
+              - name: securities.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata_yields.primary_board
+                value: ""
+                disabled: true
+              - name: assets
+                value: ""
+                disabled: true
+              - name: securities.assets
+                value: ""
+                disabled: true
+              - name: marketdata.assets
+                value: ""
+                disabled: true
+              - name: marketdata_yields.assets
+                value: ""
+                disabled: true
+              - name: index
+                value: ""
+                disabled: true
+              - name: securities.index
+                value: ""
+                disabled: true
+              - name: marketdata.index
+                value: ""
+                disabled: true
+              - name: marketdata_yields.index
+                value: ""
+                disabled: true
+              - name: securities
+                value: ""
+                disabled: true
+              - name: securities.securities
+                value: ""
+                disabled: true
+              - name: marketdata.securities
+                value: ""
+                disabled: true
+              - name: marketdata_yields.securities
+                value: ""
+                disabled: true
+              - name: sectypes
+                value: ""
+                disabled: true
+              - name: securities.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sectypes
+                value: ""
+                disabled: true
+              - name: security_collection
+                value: ""
+                disabled: true
+              - name: securities.security_collection
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards.json"
+            name: Получить справочник режимов торгов рынка
+              (https://iss.moex.com/iss/reference/43)
+            meta:
+              id: req_0daac0d9973e49ffb84a7ca0075594bb
+              created: 1763844901597
+              modified: 1763844901597
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900137
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards/{{board}}.js\
+              on"
+            name: Получить описание режима торгов (https://iss.moex.com/iss/reference/49)
+            meta:
+              id: req_a2cc408355b6414188bc5c91fc2c87f8
+              created: 1763844901597
+              modified: 1763844901597
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900136
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards/{{board}}/se\
+              curities.json"
+            name: Получить таблицу инструментов по режиму торгов
+              (https://iss.moex.com/iss/reference/32)
+            meta:
+              id: req_c615c81d8d6d4ac59b3248f5efd90515
+              created: 1763844901597
+              modified: 1763844901597
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900135
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: securities,marketdata,dataversion,marketdata_yields
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: securities.lang
+                value: ru
+                disabled: true
+              - name: marketdata.lang
+                value: ru
+                disabled: true
+              - name: marketdata_yields.lang
+                value: ru
+                disabled: true
+              - name: first
+                value: "0"
+                disabled: true
+              - name: securities.first
+                value: "0"
+                disabled: true
+              - name: marketdata.first
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.first
+                value: "0"
+                disabled: true
+              - name: sort_column
+                value: ""
+                disabled: true
+              - name: securities.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sort_column
+                value: ""
+                disabled: true
+              - name: sort_order
+                value: asc
+                disabled: true
+              - name: securities.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata_yields.sort_order
+                value: asc
+                disabled: true
+              - name: leaders
+                value: "0"
+                disabled: true
+              - name: securities.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.leaders
+                value: "0"
+                disabled: true
+              - name: nearest
+                value: "0"
+                disabled: true
+              - name: securities.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.nearest
+                value: "0"
+                disabled: true
+              - name: previous_session
+                value: "0"
+                disabled: true
+              - name: securities.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.previous_session
+                value: "0"
+                disabled: true
+              - name: primary_board
+                value: ""
+                disabled: true
+              - name: securities.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata_yields.primary_board
+                value: ""
+                disabled: true
+              - name: assets
+                value: ""
+                disabled: true
+              - name: securities.assets
+                value: ""
+                disabled: true
+              - name: marketdata.assets
+                value: ""
+                disabled: true
+              - name: marketdata_yields.assets
+                value: ""
+                disabled: true
+              - name: index
+                value: ""
+                disabled: true
+              - name: securities.index
+                value: ""
+                disabled: true
+              - name: marketdata.index
+                value: ""
+                disabled: true
+              - name: marketdata_yields.index
+                value: ""
+                disabled: true
+              - name: securities
+                value: ""
+                disabled: true
+              - name: securities.securities
+                value: ""
+                disabled: true
+              - name: marketdata.securities
+                value: ""
+                disabled: true
+              - name: marketdata_yields.securities
+                value: ""
+                disabled: true
+              - name: sectypes
+                value: ""
+                disabled: true
+              - name: securities.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sectypes
+                value: ""
+                disabled: true
+              - name: security_collection
+                value: ""
+                disabled: true
+              - name: securities.security_collection
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+          - url: "{{baseUrl}}/iss/engines/{{engine}}/markets/{{market}}/boards/{{board}}/se\
+              curities/{{security}}.json"
+            name: Получить данные по указанному инструменту на выбранном режиме торгов
+              (https://iss.moex.com/iss/reference/53)
+            meta:
+              id: req_af5552ea1d644badb1a75e6463603e94
+              created: 1763844901598
+              modified: 1763844901598
+              isPrivate: false
+              description: ""
+              sortKey: -1763844900134
+            method: GET
+            parameters:
+              - name: iss.meta
+                value: off
+                disabled: true
+              - name: iss.only
+                value: securities,marketdata,dataversion,marketdata_yields
+                disabled: true
+              - name: lang
+                value: ru
+                disabled: true
+              - name: securities.lang
+                value: ru
+                disabled: true
+              - name: marketdata.lang
+                value: ru
+                disabled: true
+              - name: marketdata_yields.lang
+                value: ru
+                disabled: true
+              - name: first
+                value: "0"
+                disabled: true
+              - name: securities.first
+                value: "0"
+                disabled: true
+              - name: marketdata.first
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.first
+                value: "0"
+                disabled: true
+              - name: sort_column
+                value: ""
+                disabled: true
+              - name: securities.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata.sort_column
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sort_column
+                value: ""
+                disabled: true
+              - name: sort_order
+                value: asc
+                disabled: true
+              - name: securities.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata.sort_order
+                value: asc
+                disabled: true
+              - name: marketdata_yields.sort_order
+                value: asc
+                disabled: true
+              - name: leaders
+                value: "0"
+                disabled: true
+              - name: securities.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata.leaders
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.leaders
+                value: "0"
+                disabled: true
+              - name: nearest
+                value: "0"
+                disabled: true
+              - name: securities.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata.nearest
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.nearest
+                value: "0"
+                disabled: true
+              - name: previous_session
+                value: "0"
+                disabled: true
+              - name: securities.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata.previous_session
+                value: "0"
+                disabled: true
+              - name: marketdata_yields.previous_session
+                value: "0"
+                disabled: true
+              - name: primary_board
+                value: ""
+                disabled: true
+              - name: securities.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata.primary_board
+                value: ""
+                disabled: true
+              - name: marketdata_yields.primary_board
+                value: ""
+                disabled: true
+              - name: assets
+                value: ""
+                disabled: true
+              - name: securities.assets
+                value: ""
+                disabled: true
+              - name: marketdata.assets
+                value: ""
+                disabled: true
+              - name: marketdata_yields.assets
+                value: ""
+                disabled: true
+              - name: index
+                value: ""
+                disabled: true
+              - name: securities.index
+                value: ""
+                disabled: true
+              - name: marketdata.index
+                value: ""
+                disabled: true
+              - name: marketdata_yields.index
+                value: ""
+                disabled: true
+              - name: securities
+                value: ""
+                disabled: true
+              - name: securities.securities
+                value: ""
+                disabled: true
+              - name: marketdata.securities
+                value: ""
+                disabled: true
+              - name: marketdata_yields.securities
+                value: ""
+                disabled: true
+              - name: sectypes
+                value: ""
+                disabled: true
+              - name: securities.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata.sectypes
+                value: ""
+                disabled: true
+              - name: marketdata_yields.sectypes
+                value: ""
+                disabled: true
+              - name: security_collection
+                value: ""
+                disabled: true
+              - name: securities.security_collection
+                value: ""
+                disabled: true
+            settings:
+              renderRequestBody: true
+              encodeUrl: true
+              followRedirects: global
+              cookies:
+                send: true
+                store: true
+              rebuildPath: true
+    environment:
+      baseUrl: https://iss.moex.com
+      security: YNDX
+      index: IMOEX
+      ticker: YNDX
+      engine: stock
+      market: shares
+      board: TQBR
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1763836991575
+    modified: 1763837102708
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1763836991574
+    modified: 1763840726607
+    isPrivate: false

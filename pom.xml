@@ -9,7 +9,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>MOEX ISS SDK</name>
-  <url>https://eric.vlaskin.org</url>
+  <url>https://drambluker.github.io/moexiss-sdk</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -111,6 +111,10 @@
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
           <version>3.7.1</version>
+          <configuration>
+            <locales>default,ru</locales>
+            <outputDirectory>${basedir}/docs</outputDirectory>
+          </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-project-info-reports-plugin</artifactId>

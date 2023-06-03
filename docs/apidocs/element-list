@@ -1,0 +1,15 @@
+org.vlaskin.moexiss
+org.vlaskin.moexiss.entity
+org.vlaskin.moexiss.entity.base
+org.vlaskin.moexiss.params
+org.vlaskin.moexiss.response
+org.vlaskin.moexiss.response.field
+org.vlaskin.moexiss.service
+org.vlaskin.moexiss.service.dictionary
+org.vlaskin.moexiss.service.engine
+org.vlaskin.moexiss.service.engine.params
+org.vlaskin.moexiss.service.security
+org.vlaskin.moexiss.service.security.params
+org.vlaskin.moexiss.service.statistic
+org.vlaskin.moexiss.service.statistic.params
+org.vlaskin.moexiss.utils

@@ -18,6 +18,8 @@ public class Security
     private final String securityId;
     private final String boardId;
     private final String shortname;
+    private final Double annualHigh;
+    private final Double annualLow;
     private final Double previousPrice;
     private final Integer lotSize;
     private final Double faceValue;
@@ -31,9 +33,18 @@ public class Security
     private final String sectorId;
     private final Double minStep;
     private final Double previousWeightedAveragePrice;
+    private final Double previousWeightedAveragePriceYield;
+    private final Double couponValue;
     private final String faceUnit;
     private final LocalDate previousDate;
+    private final LocalDate nextCouponDate;
+    private final Integer couponPeriod;
+    private final Double accruedInterest;
+    private final Double couponPercent;
+    private final Double buybackPrice;
+    private final LocalDate buybackDate;
     private final Long issueSize;
+    private final Long issueSizePlaced;
     private final String isin;
     private final String engName;
     private final Double previousLegalClosePrice;
@@ -50,7 +61,11 @@ public class Security
     private final String primaryBoardId;
     private final String marketPriceBoardId;
     private final Integer listLevel;
+    private final LocalDate maturityDate;
+    private final LocalDate offerDate;
     private final LocalDate settlementDate;
+    private final String calculationMode;
+    private final Double lotValue;
 
     public static class Processor extends AbstractProcessor<Security>
     {
@@ -72,25 +87,42 @@ public class Security
                 case "secid", "SECID" -> securityBuilder.securityId(value.getAsString());
                 case "BOARDID" -> securityBuilder.boardId(value.getAsString());
                 case "shortname", "SHORTNAME" -> securityBuilder.shortname(value.getAsString());
+                case "ANNUALHIGH" -> securityBuilder.annualHigh(value.getAsDouble());
+                case "ANNUALLOW" -> securityBuilder.annualLow(value.getAsDouble());
                 case "PREVPRICE" -> securityBuilder.previousPrice(value.getAsDouble());
                 case "LOTSIZE" -> securityBuilder.lotSize(value.getAsInt());
                 case "FACEVALUE" -> securityBuilder.faceValue(value.getAsDouble());
                 case "STATUS" -> securityBuilder.status(value.getAsString());
                 case "BOARDNAME" -> securityBuilder.boardName(value.getAsString());
                 case "DECIMALS" -> securityBuilder.decimals(value.getAsInt());
-                case "name", "SECNAME" -> securityBuilder.name(value.getAsString());
+                case "name", "NAME", "SECNAME" -> securityBuilder.name(value.getAsString());
                 case "REMARKS" -> securityBuilder.remarks(value.getAsString());
                 case "MARKETCODE" -> securityBuilder.marketCode(value.getAsString());
                 case "INSTRID" -> securityBuilder.instrId(value.getAsString());
                 case "SECTORID" -> securityBuilder.sectorId(value.getAsString());
                 case "MINSTEP" -> securityBuilder.minStep(value.getAsDouble());
                 case "PREVWAPRICE" -> securityBuilder.previousWeightedAveragePrice(value.getAsDouble());
+                case "YIELDATPREVWAPRICE" -> securityBuilder.previousWeightedAveragePriceYield(value.getAsDouble());
+                case "COUPONVALUE" -> securityBuilder.couponValue(value.getAsDouble());
                 case "FACEUNIT" -> securityBuilder.faceUnit(value.getAsString());
                 case "PREVDATE" -> {
                     if (!"0000-00-00".equals(value.getAsString()))
                         securityBuilder.previousDate(LocalDate.parse(value.getAsString()));
                 }
+                case "NEXTCOUPON" -> {
+                    if (!"0000-00-00".equals(value.getAsString()))
+                        securityBuilder.nextCouponDate(LocalDate.parse(value.getAsString()));
+                }
+                case "COUPONPERIOD" -> securityBuilder.couponPeriod(value.getAsInt());
+                case "ACCRUEDINT" -> securityBuilder.accruedInterest(value.getAsDouble());
+                case "COUPONPERCENT" -> securityBuilder.couponPercent(value.getAsDouble());
+                case "BUYBACKPRICE" -> securityBuilder.buybackPrice(value.getAsDouble());
+                case "BUYBACKDATE" -> {
+                    if (!"0000-00-00".equals(value.getAsString()))
+                        securityBuilder.buybackDate(LocalDate.parse(value.getAsString()));
+                }
                 case "ISSUESIZE" -> securityBuilder.issueSize(value.getAsLong());
+                case "ISSUESIZEPLACED" -> securityBuilder.issueSizePlaced(value.getAsLong());
                 case "isin", "ISIN" -> securityBuilder.isin(value.getAsString());
                 case "LATNAME" -> securityBuilder.engName(value.getAsString());
                 case "regnumber", "REGNUMBER" -> securityBuilder.regNumber(value.getAsString());
@@ -107,10 +139,20 @@ public class Security
                 case "primary_boardid" -> securityBuilder.primaryBoardId(value.getAsString());
                 case "marketprice_boardid" -> securityBuilder.marketPriceBoardId(value.getAsString());
                 case "LISTLEVEL" -> securityBuilder.listLevel(value.getAsInt());
+                case "MATDATE" -> {
+                    if (!"0000-00-00".equals(value.getAsString()))
+                        securityBuilder.maturityDate(LocalDate.parse(value.getAsString()));
+                }
+                case "OFFERDATE" -> {
+                    if (!"0000-00-00".equals(value.getAsString()))
+                        securityBuilder.offerDate(LocalDate.parse(value.getAsString()));
+                }
                 case "SETTLEDATE" -> {
                     if (!"0000-00-00".equals(value.getAsString()))
                         securityBuilder.settlementDate(LocalDate.parse(value.getAsString()));
                 }
+                case "CALCMODE" -> securityBuilder.calculationMode(value.getAsString());
+                case "LOTVALUE" -> securityBuilder.lotValue(value.getAsDouble());
                 default -> throw new UnknownAttributeException(getClass(), name);
             }
         }

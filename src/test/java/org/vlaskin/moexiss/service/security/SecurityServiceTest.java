@@ -24,30 +24,30 @@ class SecurityServiceTest
     @Test
     void getList() throws IOException
     {
-        log.info(service.getList(listParams).toString());
+        log.debug(service.getList(listParams).toString());
     }
 
     @Test
     void getInfo() throws IOException
     {
-        log.info(service.getInfo(infoParams).toString());
+        log.debug(service.getInfo(infoParams).toString());
     }
 
     @Test
     void getDescriptionsInfo() throws IOException
     {
-        log.info(service.getDescriptionsInfo(infoParams).toString());
+        log.debug(service.getDescriptionsInfo(infoParams).toString());
     }
 
     @Test
     void getBoardsInfo() throws IOException
     {
-        log.info(service.getBoardsInfo(infoParams).toString());
+        log.debug(service.getBoardsInfo(infoParams).toString());
     }
 
     @Test
     void getIndices() throws IOException
     {
-        log.info(service.getIndices(indicesParams).toString());
+        log.debug(service.getIndices(indicesParams).toString());
     }
 }

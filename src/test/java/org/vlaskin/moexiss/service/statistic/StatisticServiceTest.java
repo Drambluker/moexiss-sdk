@@ -26,54 +26,54 @@ class StatisticServiceTest
     @Test
     void getIndices() throws IOException
     {
-        log.info(service.getIndices(indicesParams).toString());
+        log.debug(service.getIndices(indicesParams).toString());
     }
 
     @Test
     void getIndexAnalytics() throws IOException
     {
-        log.info(service.getIndexAnalytics(analyticsParams).toString());
+        log.debug(service.getIndexAnalytics(analyticsParams).toString());
     }
 
     @Test
     void getIndexAnalyticsData() throws IOException
     {
-        log.info(service.getIndexAnalyticsData(analyticsParams).toString());
+        log.debug(service.getIndexAnalyticsData(analyticsParams).toString());
     }
 
     @Test
     void getIndexAnalyticsCursor() throws IOException
     {
-        log.info(service.getIndexAnalyticsCursor(analyticsParams).toString());
+        log.debug(service.getIndexAnalyticsCursor(analyticsParams).toString());
     }
 
     @Test
     void getIndexAnalyticsDates() throws IOException
     {
-        log.info(service.getIndexAnalyticsDates(analyticsParams).toString());
+        log.debug(service.getIndexAnalyticsDates(analyticsParams).toString());
     }
 
     @Test
     void getTickers() throws IOException
     {
-        log.info(service.getTickers(tickersParams).toString());
+        log.debug(service.getTickers(tickersParams).toString());
     }
 
     @Test
     void getTickerInfo() throws IOException
     {
-        log.info(service.getTickerInfo(tickerInfoParams).toString());
+        log.debug(service.getTickerInfo(tickerInfoParams).toString());
     }
 
     @Test
     void getTickerInfoData() throws IOException
     {
-        log.info(service.getTickerInfoData(tickerInfoParams).toString());
+        log.debug(service.getTickerInfoData(tickerInfoParams).toString());
     }
 
     @Test
     void getTickerInfoCursor() throws IOException
     {
-        log.info(service.getTickerInfoCursor(tickerInfoParams).toString());
+        log.debug(service.getTickerInfoCursor(tickerInfoParams).toString());
     }
 }

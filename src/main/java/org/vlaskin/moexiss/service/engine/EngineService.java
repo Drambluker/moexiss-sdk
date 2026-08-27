@@ -2,9 +2,9 @@ package org.vlaskin.moexiss.service.engine;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
-import org.apache.hc.client5.http.fluent.Request;
 import org.vlaskin.moexiss.entity.*;
 import org.vlaskin.moexiss.entity.base.EntityType;
+import org.vlaskin.moexiss.http.MoexHttpTransport;
 import org.vlaskin.moexiss.response.Response;
 import org.vlaskin.moexiss.response.ResponseUtils;
 import org.vlaskin.moexiss.response.field.FieldResponse;
@@ -12,13 +12,22 @@ import org.vlaskin.moexiss.service.BaseService;
 import org.vlaskin.moexiss.service.engine.params.*;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 public class EngineService extends BaseService
 {
+    public EngineService()
+    {
+        super();
+    }
+
+    public EngineService(String baseUrl, MoexHttpTransport httpTransport)
+    {
+        super(baseUrl, httpTransport);
+    }
+
     // BEGIN --> https://iss.moex.com/iss/reference/40
 
     /**
@@ -27,12 +36,12 @@ public class EngineService extends BaseService
     public List<EngineResponse> getList(ListEngineParams params) throws IOException
     {
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines.json");
+        requestBuilder.append(baseUrl).append("/iss/engines.json");
         pasteBasicRequestParams(requestBuilder);
         requestBuilder.append("&lang=").append(params.getLanguage());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return ResponseUtils.convertTo(EntityType.TRADING_SYSTEM, gson.fromJson(responseString, Response.class));
     }
@@ -88,12 +97,12 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getEngine());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine()).append(".json");
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine()).append(".json");
         pasteBasicRequestParams(requestBuilder, only);
         requestBuilder.append("&lang=").append(params.getLanguage());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }
@@ -109,12 +118,12 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getEngine());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine()).append("/markets.json");
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine()).append("/markets.json");
         pasteBasicRequestParams(requestBuilder);
         requestBuilder.append("&lang=").append(params.getLanguage());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return ResponseUtils.convertTo(EntityType.MARKET, gson.fromJson(responseString, Response.class));
     }
@@ -249,13 +258,13 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getMarket());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine())
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine())
                 .append("/markets/").append(params.getMarket()).append(".json");
         pasteBasicRequestParams(requestBuilder, only);
         requestBuilder.append("&lang=").append(params.getLanguage());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, FieldResponse.class);
     }
@@ -319,12 +328,12 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getMarket());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine())
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine())
                 .append("/markets/").append(params.getMarket()).append("/securities.json");
         pasteSecuritiesTableParams(requestBuilder, params, only);
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }
@@ -389,13 +398,13 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getSecurity());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine())
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine())
                 .append("/markets/").append(params.getMarket()).append("/securities/")
                 .append(params.getSecurity()).append(".json");
         pasteSecuritiesTableParams(requestBuilder, params, only);
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }
@@ -412,7 +421,7 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getMarket());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine())
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine())
                 .append("/markets/").append(params.getMarket()).append("/boards.json");
 
         Response response = getBasicBoardsResponse(params, requestBuilder);
@@ -432,7 +441,7 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getBoard());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine())
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine())
                 .append("/markets/").append(params.getMarket())
                 .append("/boards/").append(params.getBoard()).append(".json");
 
@@ -448,7 +457,7 @@ public class EngineService extends BaseService
         requestBuilder.append("&lang=").append(params.getLanguage());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }
@@ -512,13 +521,13 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getBoard());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine())
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine())
                 .append("/markets/").append(params.getMarket())
                 .append("/boards/").append(params.getBoard()).append("/securities.json");
         pasteSecuritiesTableParams(requestBuilder, params, only);
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }
@@ -587,14 +596,14 @@ public class EngineService extends BaseService
         Validate.notBlank(params.getSecurity());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/engines/").append(params.getEngine())
+        requestBuilder.append(baseUrl).append("/iss/engines/").append(params.getEngine())
                 .append("/markets/").append(params.getMarket())
                 .append("/boards/").append(params.getBoard())
                 .append("/securities/").append(params.getSecurity()).append(".json");
         pasteSecuritiesTableParams(requestBuilder, params, only);
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }

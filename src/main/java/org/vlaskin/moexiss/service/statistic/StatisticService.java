@@ -2,9 +2,9 @@ package org.vlaskin.moexiss.service.statistic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
-import org.apache.hc.client5.http.fluent.Request;
 import org.vlaskin.moexiss.entity.*;
 import org.vlaskin.moexiss.entity.base.EntityType;
+import org.vlaskin.moexiss.http.MoexHttpTransport;
 import org.vlaskin.moexiss.response.Response;
 import org.vlaskin.moexiss.response.ResponseUtils;
 import org.vlaskin.moexiss.service.BaseService;
@@ -14,12 +14,21 @@ import org.vlaskin.moexiss.service.statistic.params.TickerInfoStatisticParams;
 import org.vlaskin.moexiss.service.statistic.params.TickersStatisticParams;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
 public class StatisticService extends BaseService
 {
+    public StatisticService()
+    {
+        super();
+    }
+
+    public StatisticService(String baseUrl, MoexHttpTransport httpTransport)
+    {
+        super(baseUrl, httpTransport);
+    }
+
     // BEGIN --> https://iss.moex.com/iss/reference/146
 
     /**
@@ -28,16 +37,16 @@ public class StatisticService extends BaseService
     public List<IndexResponse> getIndices(IndicesStatisticParams params) throws IOException
     {
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/statistics/engines/stock/markets/index/analytics.json");
+        requestBuilder.append(baseUrl).append("/iss/statistics/engines/stock/markets/index/analytics.json");
         pasteBasicRequestParams(requestBuilder);
         requestBuilder.append("&lang=").append(params.getLanguage())
                 .append("&tradingsession=").append(params.getTradingSession());
 
         if (params.getSecurityCollection() != null)
-            requestBuilder.append("&security_collection=").append(params.getSecurityCollection());
+            requestBuilder.append("&security_collection=").append(encodeQueryParameter(params.getSecurityCollection()));
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return ResponseUtils.convertTo(EntityType.INDEX, gson.fromJson(responseString, Response.class));
     }
@@ -87,7 +96,7 @@ public class StatisticService extends BaseService
         Validate.notBlank(params.getIndex());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/statistics/engines/stock/markets/index/analytics/").append(params.getIndex()).append(".json");
+        requestBuilder.append(baseUrl).append("/iss/statistics/engines/stock/markets/index/analytics/").append(params.getIndex()).append(".json");
         pasteBasicRequestParams(requestBuilder, only);
 
         if (params.getLanguage() != null)
@@ -99,10 +108,10 @@ public class StatisticService extends BaseService
         if (params.getDate() != null)
             requestBuilder.append("&date=").append(params.getDate());
         if (params.getTickers() != null)
-            requestBuilder.append("&tickers=").append(params.getTickers());
+            requestBuilder.append("&tickers=").append(encodeQueryParameter(params.getTickers()));
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }
@@ -118,7 +127,7 @@ public class StatisticService extends BaseService
         Validate.notBlank(params.getIndex());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/statistics/engines/stock/markets/index/analytics/").append(params.getIndex())
+        requestBuilder.append(baseUrl).append("/iss/statistics/engines/stock/markets/index/analytics/").append(params.getIndex())
                 .append("/tickers.json");
         pasteBasicRequestParams(requestBuilder);
         requestBuilder.append("&tradingsession=").append(params.getTradingSession());
@@ -127,7 +136,7 @@ public class StatisticService extends BaseService
             requestBuilder.append("&date=").append(params.getDate());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return ResponseUtils.convertTo(EntityType.TICKER, gson.fromJson(responseString, Response.class));
     }
@@ -165,7 +174,7 @@ public class StatisticService extends BaseService
         Validate.notBlank(params.getTicker());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/statistics/engines/stock/markets/index/analytics/").append(params.getIndex())
+        requestBuilder.append(baseUrl).append("/iss/statistics/engines/stock/markets/index/analytics/").append(params.getIndex())
                 .append("/tickers/").append(params.getTicker()).append(".json");
         pasteBasicRequestParams(requestBuilder, only);
         requestBuilder.append("&lang=").append(params.getLanguage())
@@ -175,7 +184,7 @@ public class StatisticService extends BaseService
                 .append("&till=").append(params.getTill());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }

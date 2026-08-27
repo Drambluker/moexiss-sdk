@@ -1,0 +1,12 @@
+{
+  "securities": {
+    "metadata": {
+      "id": {"type": "int32"},
+      "secid": {"type": "string"},
+      "shortname": {"type": "string"},
+      "is_traded": {"type": "int32"}
+    },
+    "columns": ["id", "secid", "shortname", "is_traded"],
+    "data": [[42, "SBER", "Sberbank", 1]]
+  }
+}

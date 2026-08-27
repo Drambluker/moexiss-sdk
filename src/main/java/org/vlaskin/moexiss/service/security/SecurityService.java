@@ -2,13 +2,13 @@ package org.vlaskin.moexiss.service.security;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.Validate;
-import org.apache.hc.client5.http.fluent.Request;
 import org.vlaskin.moexiss.entity.BoardResponse;
 import org.vlaskin.moexiss.entity.DescriptionResponse;
 import org.vlaskin.moexiss.entity.IndexResponse;
 import org.vlaskin.moexiss.entity.SecurityInfoResponse;
 import org.vlaskin.moexiss.entity.SecurityResponse;
 import org.vlaskin.moexiss.entity.base.EntityType;
+import org.vlaskin.moexiss.http.MoexHttpTransport;
 import org.vlaskin.moexiss.response.Response;
 import org.vlaskin.moexiss.response.ResponseUtils;
 import org.vlaskin.moexiss.service.BaseService;
@@ -17,12 +17,21 @@ import org.vlaskin.moexiss.service.security.params.InfoSecurityParams;
 import org.vlaskin.moexiss.service.security.params.ListSecurityParams;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Slf4j
 public class SecurityService extends BaseService
 {
+    public SecurityService()
+    {
+        super();
+    }
+
+    public SecurityService(String baseUrl, MoexHttpTransport httpTransport)
+    {
+        super(baseUrl, httpTransport);
+    }
+
     // BEGIN --> https://iss.moex.com/iss/reference/5
 
     /**
@@ -31,14 +40,14 @@ public class SecurityService extends BaseService
     public List<SecurityResponse> getList(ListSecurityParams params) throws IOException
     {
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/securities.json");
+        requestBuilder.append(baseUrl).append("/iss/securities.json");
         pasteBasicRequestParams(requestBuilder);
         requestBuilder.append("&lang=").append(params.getLanguage())
                 .append("&start=").append(params.getPageIndex() * params.getLimit())
                 .append("&limit=").append(params.getLimit());
 
         if (params.getQuery() != null)
-            requestBuilder.append("&q=").append(params.getQuery());
+            requestBuilder.append("&q=").append(encodeQueryParameter(params.getQuery()));
         if (params.getEngine() != null)
             requestBuilder.append("&engine=").append(params.getEngine());
         if (params.getMarket() != null)
@@ -50,11 +59,11 @@ public class SecurityService extends BaseService
         if (params.getGroupByFilter() != null)
         {
             Validate.notNull(params.getGroupBy());
-            requestBuilder.append("&group_by_filter=").append(params.getGroupByFilter());
+            requestBuilder.append("&group_by_filter=").append(encodeQueryParameter(params.getGroupByFilter()));
         }
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return ResponseUtils.convertTo(EntityType.SECURITY, gson.fromJson(responseString, Response.class));
     }
@@ -97,7 +106,7 @@ public class SecurityService extends BaseService
         Validate.notBlank(params.getSecurity());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/securities/").append(params.getSecurity()).append(".json");
+        requestBuilder.append(baseUrl).append("/iss/securities/").append(params.getSecurity()).append(".json");
         pasteBasicRequestParams(requestBuilder, only);
         requestBuilder.append("&lang=").append(params.getLanguage());
 
@@ -105,7 +114,7 @@ public class SecurityService extends BaseService
             requestBuilder.append("&boards.start=").append(params.getStartIndex());
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return gson.fromJson(responseString, Response.class);
     }
@@ -121,13 +130,13 @@ public class SecurityService extends BaseService
         Validate.notBlank(params.getSecurity());
 
         StringBuilder requestBuilder = new StringBuilder();
-        requestBuilder.append(BASE_URL).append("/iss/securities/").append(params.getSecurity()).append("/indices.json");
+        requestBuilder.append(baseUrl).append("/iss/securities/").append(params.getSecurity()).append("/indices.json");
         pasteBasicRequestParams(requestBuilder);
         requestBuilder.append("&lang=").append(params.getLanguage())
                 .append("&only_actual=").append(params.isOnlyActual() ? 1 : 0);
 
         log.debug("Request: {}", requestBuilder);
-        String responseString = Request.get(requestBuilder.toString()).execute().returnContent().asString(StandardCharsets.UTF_8);
+        String responseString = get(requestBuilder);
         log.debug("Response: {}", responseString);
         return ResponseUtils.convertTo(EntityType.INDEX, gson.fromJson(responseString, Response.class));
     }

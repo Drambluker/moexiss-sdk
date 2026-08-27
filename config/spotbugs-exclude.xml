@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- Lombok-builder временно хранит переданные списки, а конструкторы DTO создают защитные копии. -->
+    <Match>
+        <Class name="~org[.]vlaskin[.]moexiss[.]entity[.].*[$].*Builder"/>
+        <Bug pattern="EI_EXPOSE_REP2"/>
+    </Match>
+
+    <!-- Ошибка валидации должна прерывать создание сервиса; финализаторы в иерархии отсутствуют. -->
+    <Match>
+        <Class name="org.vlaskin.moexiss.service.BaseService"/>
+        <Bug pattern="CT_CONSTRUCTOR_THROW"/>
+    </Match>
+</FindBugsFilter>

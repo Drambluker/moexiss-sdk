@@ -1,0 +1,38 @@
+{
+  "securities": {
+    "metadata": {
+      "SECID": {"type": "string"},
+      "BOARDID": {"type": "string"},
+      "SHORTNAME": {"type": "string"},
+      "LOTSIZE": {"type": "int32"}
+    },
+    "columns": ["SECID", "BOARDID", "SHORTNAME", "LOTSIZE"],
+    "data": [["SBER", "TQBR", "Sberbank", 1]]
+  },
+  "marketdata": {
+    "metadata": {
+      "SECID": {"type": "string"},
+      "BOARDID": {"type": "string"},
+      "LAST": {"type": "double"},
+      "UPDATETIME": {"type": "time"}
+    },
+    "columns": ["SECID", "BOARDID", "LAST", "UPDATETIME"],
+    "data": [["SBER", "TQBR", 277.04, "23:50:22"]]
+  },
+  "dataversion": {
+    "metadata": {
+      "data_version": {"type": "int32"},
+      "seqnum": {"type": "int64"}
+    },
+    "columns": ["data_version", "seqnum"],
+    "data": [[8949, 20260909235958]]
+  },
+  "marketdata_yields": {
+    "metadata": {
+      "boardid": {"type": "string"},
+      "secid": {"type": "string"}
+    },
+    "columns": ["boardid", "secid"],
+    "data": []
+  }
+}

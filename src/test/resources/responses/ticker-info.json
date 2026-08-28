@@ -1,0 +1,26 @@
+{
+  "ticker": {
+    "metadata": {
+      "indexid": {"type": "string"},
+      "tradedate": {"type": "date"},
+      "ticker": {"type": "string"},
+      "shortnames": {"type": "string"},
+      "secids": {"type": "string"},
+      "waprice": {"type": "double"},
+      "weight": {"type": "double"},
+      "num_trades": {"type": "int64"},
+      "tradingsession": {"type": "int32"}
+    },
+    "columns": ["indexid", "tradedate", "ticker", "shortnames", "secids", "waprice", "weight", "num_trades", "tradingsession"],
+    "data": [["IMOEX", "2026-08-31", "SBER", "Sberbank", "SBER", 275.49, 12.72, 111077, 3]]
+  },
+  "ticker.cursor": {
+    "metadata": {
+      "INDEX": {"type": "int64"},
+      "TOTAL": {"type": "int64"},
+      "PAGESIZE": {"type": "int64"}
+    },
+    "columns": ["INDEX", "TOTAL", "PAGESIZE"],
+    "data": [[0, 21, 20]]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "engines": {
+    "metadata": {
+      "id": {"type": "int32"},
+      "name": {"type": "string"},
+      "short_title": {"type": "string"},
+      "title": {"type": "string"}
+    },
+    "columns": ["id", "name", "short_title", "title"],
+    "data": [[1, "stock", "Stock", "Stock market and deposits"]]
+  }
+}

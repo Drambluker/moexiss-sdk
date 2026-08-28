@@ -1,0 +1,15 @@
+{
+  "indices": {
+    "metadata": {
+      "SECID": {"type": "string"},
+      "SHORTNAME": {"type": "string"},
+      "FROM": {"type": "date"},
+      "TILL": {"type": "date"},
+      "CURRENTVALUE": {"type": "double"},
+      "LASTCHANGEPRC": {"type": "double"},
+      "LASTCHANGE": {"type": "double"}
+    },
+    "columns": ["SECID", "SHORTNAME", "FROM", "TILL", "CURRENTVALUE", "LASTCHANGEPRC", "LASTCHANGE"],
+    "data": [["EPSI", "MOEX Pension Equity Sub-index", "2011-11-21", "2026-09-09", 1283.7, -0.53, -6.85]]
+  }
+}

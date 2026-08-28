@@ -1,0 +1,11 @@
+{
+  "markets": {
+    "metadata": {
+      "id": {"type": "int32"},
+      "NAME": {"type": "string"},
+      "title": {"type": "string"}
+    },
+    "columns": ["id", "NAME", "title"],
+    "data": [[1, "shares", "Equities Market"]]
+  }
+}

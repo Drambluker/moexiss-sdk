@@ -1,0 +1,38 @@
+{
+  "description": {
+    "metadata": {
+      "name": {"type": "string"},
+      "title": {"type": "string"},
+      "value": {"type": "string"},
+      "type": {"type": "string"},
+      "sort_order": {"type": "int64"},
+      "is_hidden": {"type": "int64"},
+      "precision": {"type": "int64"}
+    },
+    "columns": ["name", "title", "value", "type", "sort_order", "is_hidden", "precision"],
+    "data": [["SECID", "Security code", "SBER", "string", 1, 0, null]]
+  },
+  "boards": {
+    "metadata": {
+      "secid": {"type": "string"},
+      "boardid": {"type": "string"},
+      "title": {"type": "string"},
+      "board_group_id": {"type": "int32"},
+      "market_id": {"type": "int32"},
+      "market": {"type": "string"},
+      "engine_id": {"type": "int32"},
+      "engine": {"type": "string"},
+      "is_traded": {"type": "int32"},
+      "decimals": {"type": "int32"},
+      "history_from": {"type": "date"},
+      "history_till": {"type": "date"},
+      "listed_from": {"type": "date"},
+      "listed_till": {"type": "date"},
+      "is_primary": {"type": "int32"},
+      "currencyid": {"type": "string"},
+      "unit": {"type": "string"}
+    },
+    "columns": ["secid", "boardid", "title", "board_group_id", "market_id", "market", "engine_id", "engine", "is_traded", "decimals", "history_from", "history_till", "listed_from", "listed_till", "is_primary", "currencyid", "unit"],
+    "data": [["SBER", "TQBR", "T+: stocks, DRs - order-driven", 57, 1, "shares", 1, "stock", 1, 2, "2013-03-25", "2026-09-09", "2013-03-25", "2026-09-09", 1, "RUB", "M"]]
+  }
+}

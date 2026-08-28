@@ -1,0 +1,33 @@
+{
+  "marketdata_yields": {
+    "metadata": {
+      "SECID": {
+        "type": "string",
+        "bytes": 36,
+        "max_size": 0
+      },
+      "BOARDID": {
+        "type": "string",
+        "bytes": 12,
+        "max_size": 0
+      },
+      "YIELDDATE": {
+        "type": "date",
+        "bytes": 10,
+        "max_size": 0
+      }
+    },
+    "columns": [
+      "SECID",
+      "BOARDID",
+      "YIELDDATE"
+    ],
+    "data": [
+      [
+        "BYM000001818",
+        "TQCB",
+        "2027-06-29"
+      ]
+    ]
+  }
+}

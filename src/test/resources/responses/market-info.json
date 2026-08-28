@@ -1,0 +1,74 @@
+{
+  "boards": {
+    "metadata": {
+      "id": {"type": "int32"},
+      "board_group_id": {"type": "int32"},
+      "boardid": {"type": "string"},
+      "title": {"type": "string"},
+      "is_traded": {"type": "int32"}
+    },
+    "columns": ["id", "board_group_id", "boardid", "title", "is_traded"],
+    "data": [[1, 6, "EQBR", "Main market: A1 stocks - order-driven", 0]]
+  },
+  "boardgroups": {
+    "metadata": {
+      "id": {"type": "int32"},
+      "slug": {"type": "string"},
+      "title": {"type": "string"},
+      "is_default": {"type": "int32"},
+      "is_traded": {"type": "int32"}
+    },
+    "columns": ["id", "slug", "title", "is_default", "is_traded"],
+    "data": [[57, "stock_shares_tplus", "T+: Main mode - order-driven", 1, 1]]
+  },
+  "securities": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": [[1866, "SECID"]]
+  },
+  "marketdata": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": [[1866, "SECID"]]
+  },
+  "trades": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": [[133, "TRADENO"]]
+  },
+  "orderbook": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": [[2, "SECID"]]
+  },
+  "history": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": [[2707, "TRADEDATE"]]
+  },
+  "trades_hist": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": [[3095, "TRADENO"]]
+  },
+  "marketdata_yields": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": []
+  },
+  "trades_yields": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": []
+  },
+  "history_yields": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": []
+  },
+  "secstats": {
+    "metadata": {"id": {"type": "int32"}, "name": {"type": "string"}},
+    "columns": ["id", "name"],
+    "data": [[6471, "SECID"]]
+  }
+}

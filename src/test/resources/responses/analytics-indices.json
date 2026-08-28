@@ -1,0 +1,12 @@
+{
+  "indices": {
+    "metadata": {
+      "indexid": {"type": "string"},
+      "shortname": {"type": "string"},
+      "from": {"type": "date"},
+      "till": {"type": "date"}
+    },
+    "columns": ["indexid", "shortname", "from", "till"],
+    "data": [["IMOEX", "MOEX Russia Index", "2001-01-03", "2026-09-09"]]
+  }
+}

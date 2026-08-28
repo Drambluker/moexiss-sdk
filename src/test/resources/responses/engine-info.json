@@ -1,0 +1,31 @@
+{
+  "engine": {
+    "metadata": {
+      "NAME": {"type": "string"},
+      "title": {"type": "string"},
+      "short_title": {"type": "string"}
+    },
+    "columns": ["NAME", "title", "short_title"],
+    "data": [["stock", "Securities Market", "Stock"]]
+  },
+  "timetable": {
+    "metadata": {
+      "week_day": {"type": "int32"},
+      "is_work_day": {"type": "int32"},
+      "start_time": {"type": "time"},
+      "stop_time": {"type": "time"}
+    },
+    "columns": ["week_day", "is_work_day", "start_time", "stop_time"],
+    "data": [[1, 1, "06:20:00", "23:59:59"]]
+  },
+  "dailytable": {
+    "metadata": {
+      "date": {"type": "date"},
+      "is_work_day": {"type": "int32"},
+      "start_time": {"type": "time"},
+      "stop_time": {"type": "time"}
+    },
+    "columns": ["date", "is_work_day", "start_time", "stop_time"],
+    "data": [["2018-05-09", 0, "10:00:00", "18:30:00"]]
+  }
+}

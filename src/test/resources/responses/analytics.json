@@ -1,0 +1,33 @@
+{
+  "analytics": {
+    "metadata": {
+      "indexid": {"type": "string"},
+      "ticker": {"type": "string"},
+      "tradedate": {"type": "date"},
+      "trade_session_date": {"type": "date"},
+      "tradingsession": {"type": "int32"},
+      "weight": {"type": "double"}
+    },
+    "columns": ["indexid", "ticker", "tradedate", "trade_session_date", "tradingsession", "weight"],
+    "data": [["IMOEX", "SBER", "2026-08-27", "2026-08-28", 3, 12.5]]
+  },
+  "analytics.cursor": {
+    "metadata": {
+      "INDEX": {"type": "int64"},
+      "TOTAL": {"type": "int64"},
+      "PAGESIZE": {"type": "int64"},
+      "PREV_DATE": {"type": "string"},
+      "NEXT_DATE": {"type": "undefined"}
+    },
+    "columns": ["INDEX", "TOTAL", "PAGESIZE", "PREV_DATE", "NEXT_DATE"],
+    "data": [[0, 46, 20, "2026-08-27", null]]
+  },
+  "analytics.dates": {
+    "metadata": {
+      "from": {"type": "date"},
+      "till": {"type": "date"}
+    },
+    "columns": ["from", "till"],
+    "data": [["2001-01-03", "2026-09-09"]]
+  }
+}

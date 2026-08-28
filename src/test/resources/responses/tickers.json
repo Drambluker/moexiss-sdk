@@ -1,0 +1,12 @@
+{
+  "tickers": {
+    "metadata": {
+      "ticker": {"type": "string"},
+      "from": {"type": "date"},
+      "till": {"type": "date"},
+      "tradingsession": {"type": "int32"}
+    },
+    "columns": ["ticker", "from", "till", "tradingsession"],
+    "data": [["AFKS", "2012-09-18", "2026-09-09", 3]]
+  }
+}

@@ -4,9 +4,15 @@
       "id": {"type": "int32"},
       "secid": {"type": "string"},
       "shortname": {"type": "string"},
-      "is_traded": {"type": "int32"}
+      "is_traded": {"type": "int32"},
+      "FACEVALUEONSETTLEDATE": {"type": "double"},
+      "CALLOPTIONDATE": {"type": "date"},
+      "PUTOPTIONDATE": {"type": "date"},
+      "DATEYIELDFROMISSUER": {"type": "date"},
+      "BONDTYPE": {"type": "string"},
+      "BONDSUBTYPE": {"type": "string"}
     },
-    "columns": ["id", "secid", "shortname", "is_traded"],
-    "data": [[42, "SBER", "Sberbank", 1]]
+    "columns": ["id", "secid", "shortname", "is_traded", "FACEVALUEONSETTLEDATE", "CALLOPTIONDATE", "PUTOPTIONDATE", "DATEYIELDFROMISSUER", "BONDTYPE", "BONDSUBTYPE"],
+    "data": [[42, "SBER", "Sberbank", 1, 1000.0, "2026-09-01", "2026-10-01", "2026-08-28", "Fixed", "Maturity"]]
   }
 }

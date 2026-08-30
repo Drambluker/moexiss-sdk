@@ -48,6 +48,7 @@ public class IndexAnalyticsDataResponse extends BasicEntity<IndexAnalyticsDataRe
         SECURITY_CODES(String.class),
         SHORTNAMES(String.class),
         TRADE_DATE(LocalDate.class),
+        TRADE_SESSION_DATE(LocalDate.class),
         TRADING_SESSION(Integer.class),
         WEIGHT(Double.class);
 
@@ -63,6 +64,7 @@ public class IndexAnalyticsDataResponse extends BasicEntity<IndexAnalyticsDataRe
                 Map.entry("secids", SECURITY_CODES),
                 Map.entry("shortnames", SHORTNAMES),
                 Map.entry("ticker", SECURITY_CODE),
+                Map.entry("trade_session_date", TRADE_SESSION_DATE),
                 Map.entry("tradedate", TRADE_DATE),
                 Map.entry("tradingsession", TRADING_SESSION),
                 Map.entry("weight", WEIGHT)

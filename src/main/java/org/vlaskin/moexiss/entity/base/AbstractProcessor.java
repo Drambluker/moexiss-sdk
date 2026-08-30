@@ -11,6 +11,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Slf4j
 public abstract class AbstractProcessor<T extends BasicEntity<E>, E extends Enum<?>>
@@ -22,6 +24,7 @@ public abstract class AbstractProcessor<T extends BasicEntity<E>, E extends Enum
     private static final String TIME = "time";
     private static final String DATETIME = "datetime";
     private static final String STRING = "string";
+    private static final Set<UnknownAttribute> REPORTED_UNKNOWN_ATTRIBUTES = ConcurrentHashMap.newKeySet();
 
     public abstract T processJsonElement(JsonElement jsonElement, JsonArray columns, JsonObject metadata);
 
@@ -46,14 +49,16 @@ public abstract class AbstractProcessor<T extends BasicEntity<E>, E extends Enum
             }
             catch (UnknownAttributeException e)
             {
-                log.warn("""
-                        {}
-                        Columns: {}
-                        Data: {}
-                        """, e.getMessage(), columns, jsonElement);
+                if (shouldLogUnknownAttribute(e.getEntity(), e.getAttribute()))
+                    log.warn("{} - Unknown attribute: {}", e.getEntity(), e.getAttribute());
             }
             i++;
         }
+    }
+
+    static boolean shouldLogUnknownAttribute(Class<?> entity, String attribute)
+    {
+        return REPORTED_UNKNOWN_ATTRIBUTES.add(new UnknownAttribute(entity, attribute));
     }
 
     protected abstract void processValue(BasicEntity<E> entity, JsonElement value, String name, String type) throws UnknownAttributeException;
@@ -106,5 +111,9 @@ public abstract class AbstractProcessor<T extends BasicEntity<E>, E extends Enum
             this.entity = entity;
             this.attribute = attribute;
         }
+    }
+
+    private record UnknownAttribute(Class<?> entity, String attribute)
+    {
     }
 }

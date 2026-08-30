@@ -4,10 +4,11 @@
       "indexid": {"type": "string"},
       "ticker": {"type": "string"},
       "tradedate": {"type": "date"},
+      "trade_session_date": {"type": "date"},
       "tradingsession": {"type": "int32"},
       "weight": {"type": "double"}
     },
-    "columns": ["indexid", "ticker", "tradedate", "tradingsession", "weight"],
-    "data": [["IMOEX", "SBER", "2026-08-27", 3, 12.5]]
+    "columns": ["indexid", "ticker", "tradedate", "trade_session_date", "tradingsession", "weight"],
+    "data": [["IMOEX", "SBER", "2026-08-27", "2026-08-28", 3, 12.5]]
   }
 }

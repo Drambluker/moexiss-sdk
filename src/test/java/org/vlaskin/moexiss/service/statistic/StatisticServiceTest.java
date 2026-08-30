@@ -30,6 +30,8 @@ class StatisticServiceTest
         assertEquals(1, analytics.size());
         assertEquals(LocalDate.of(2026, 8, 27), analytics.getFirst().getLocalDateFields()
                 .get(IndexAnalyticsDataResponse.Fields.TRADE_DATE));
+        assertEquals(LocalDate.of(2026, 8, 28), analytics.getFirst().getLocalDateFields()
+                .get(IndexAnalyticsDataResponse.Fields.TRADE_SESSION_DATE));
         assertEquals(12.5, analytics.getFirst().getDoubleFields()
                 .get(IndexAnalyticsDataResponse.Fields.WEIGHT));
         assertEquals(TradingSession.TOTAL, analytics.getFirst().getTradingSession());

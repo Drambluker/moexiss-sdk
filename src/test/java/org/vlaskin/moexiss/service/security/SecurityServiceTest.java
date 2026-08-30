@@ -8,6 +8,7 @@ import org.vlaskin.moexiss.params.GroupBy;
 import org.vlaskin.moexiss.service.security.params.ListSecurityParams;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -38,5 +39,10 @@ class SecurityServiceTest
         assertEquals(1, securities.size());
         assertEquals("SBER", securities.getFirst().getStringFields().get(SecurityResponse.Fields.CODE));
         assertTrue(securities.getFirst().getBooleanFields().get(SecurityResponse.Fields.IS_TRADED));
+        assertEquals(1000.0, securities.getFirst().getDoubleFields()
+                .get(SecurityResponse.Fields.FACE_VALUE_ON_SETTLEMENT_DATE));
+        assertEquals(LocalDate.of(2026, 9, 1), securities.getFirst().getLocalDateFields()
+                .get(SecurityResponse.Fields.CALL_OPTION_DATE));
+        assertEquals("Fixed", securities.getFirst().getStringFields().get(SecurityResponse.Fields.BOND_TYPE));
     }
 }

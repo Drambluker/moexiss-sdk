@@ -9,22 +9,33 @@ import org.vlaskin.moexiss.entity.EngineResponse;
 import org.vlaskin.moexiss.entity.IndexAnalyticsDataResponse;
 import org.vlaskin.moexiss.entity.IndexAnalyticsResponse;
 import org.vlaskin.moexiss.entity.IndexResponse;
+import org.vlaskin.moexiss.entity.MarketInfoResponse;
 import org.vlaskin.moexiss.entity.MarketResponse;
 import org.vlaskin.moexiss.entity.MarketDataResponse;
+import org.vlaskin.moexiss.entity.SecurityInfoResponse;
 import org.vlaskin.moexiss.entity.SecurityResponse;
+import org.vlaskin.moexiss.entity.SecurityTableResponse;
+import org.vlaskin.moexiss.entity.TickerResponse;
 import org.vlaskin.moexiss.service.engine.params.BoardEngineParams;
 import org.vlaskin.moexiss.service.engine.params.BoardSecuritiesTableEngineParams;
+import org.vlaskin.moexiss.service.engine.params.BoardSecurityTableEngineParams;
 import org.vlaskin.moexiss.service.engine.params.BoardsEngineParams;
 import org.vlaskin.moexiss.service.engine.params.InfoEngineParams;
 import org.vlaskin.moexiss.service.engine.params.ListEngineParams;
+import org.vlaskin.moexiss.service.engine.params.MarketInfoEngineParams;
 import org.vlaskin.moexiss.service.engine.params.MarketSecuritiesTableEngineParams;
 import org.vlaskin.moexiss.service.engine.params.MarketSecurityTableEngineParams;
 import org.vlaskin.moexiss.service.engine.params.MarketsEngineParams;
+import org.vlaskin.moexiss.service.security.params.IndicesSecurityParams;
+import org.vlaskin.moexiss.service.security.params.InfoSecurityParams;
 import org.vlaskin.moexiss.service.security.params.ListSecurityParams;
 import org.vlaskin.moexiss.service.statistic.params.AnalyticsStatisticParams;
 import org.vlaskin.moexiss.service.statistic.params.IndicesStatisticParams;
+import org.vlaskin.moexiss.service.statistic.params.TickerInfoStatisticParams;
+import org.vlaskin.moexiss.service.statistic.params.TickersStatisticParams;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
@@ -109,6 +120,32 @@ class MoexIssLiveContractIT
     }
 
     @Test
+    void deserializesSecurityDetailsContract() throws IOException
+    {
+        SecurityInfoResponse info = retryOnIoFailure(() ->
+                client.getSecurities().getInfo(new InfoSecurityParams("SBER")));
+        List<IndexResponse> indices = retryOnIoFailure(() ->
+                client.getSecurities().getIndices(new IndicesSecurityParams("SBER")));
+
+        assertFalse(info.getDescriptions().isEmpty());
+        assertTrue(info.getBoards().stream().anyMatch(board -> "TQBR".equals(board.getCode())));
+        assertFalse(indices.isEmpty());
+        assertTrue(indices.stream().anyMatch(index -> "IMOEX".equals(
+                index.get(IndexResponse.Fields.SECURITY_CODE, String.class))));
+    }
+
+    @Test
+    void deserializesMarketMetadataContract() throws IOException
+    {
+        MarketInfoResponse info = retryOnIoFailure(() -> client.getEngines()
+                .getMarketInfo(new MarketInfoEngineParams("stock", "shares")));
+
+        assertTrue(info.getBoards().stream().anyMatch(board -> "TQBR".equals(board.getCode())));
+        assertFalse(info.getSecurityFields().isEmpty());
+        assertFalse(info.getMarketDataFields().isEmpty());
+    }
+
+    @Test
     void deserializesMarketDataContract() throws IOException
     {
         MarketSecurityTableEngineParams params =
@@ -151,6 +188,21 @@ class MoexIssLiveContractIT
                 .orElseThrow(() -> new AssertionError("SBER is missing from board TQBR"));
         assertSecurityFields(boardSecurity);
         assertEquals("TQBR", boardSecurity.getBoardCode());
+    }
+
+    @Test
+    void deserializesBoardSecurityCompositeContract() throws IOException
+    {
+        BoardSecurityTableEngineParams params =
+                new BoardSecurityTableEngineParams("stock", "shares", "TQBR", "SBER");
+
+        SecurityTableResponse table = retryOnIoFailure(() ->
+                client.getEngines().getBoardSecurityTable(params));
+
+        assertNotNull(table.getSecurity());
+        assertEquals("SBER", table.getSecurity().getCode());
+        assertFalse(table.getMarketData().isEmpty());
+        assertFalse(table.getDataVersions().isEmpty());
     }
 
     @Test
@@ -200,6 +252,33 @@ class MoexIssLiveContractIT
         assertTrue(secondPage.stream()
                 .map(IndexAnalyticsDataResponse::getSecurityCode)
                 .noneMatch(firstPageCodes::contains));
+    }
+
+    @Test
+    void deserializesTickerHistoryContract() throws IOException
+    {
+        TickerInfoStatisticParams params = new TickerInfoStatisticParams(
+                "IMOEX", "SBER", LocalDate.of(2024, 1, 1), LocalDate.of(2024, 12, 31));
+
+        List<TickerResponse> history = retryOnIoFailure(() ->
+                client.getStatistics().getTickerInfoData(params));
+
+        assertFalse(history.isEmpty());
+        assertTrue(history.stream().allMatch(item -> item.has(TickerResponse.Fields.TICKER)));
+        assertTrue(history.stream().allMatch(item -> item.getTradingSession() != null));
+    }
+
+    @Test
+    void deserializesIndexTickersContract() throws IOException
+    {
+        TickersStatisticParams params = new TickersStatisticParams("IMOEX");
+        params.setDate(LocalDate.of(2024, 12, 20));
+
+        List<TickerResponse> tickers = retryOnIoFailure(() ->
+                client.getStatistics().getTickers(params));
+
+        assertTrue(tickers.stream().anyMatch(ticker -> "SBER".equals(
+                ticker.get(TickerResponse.Fields.TICKER, String.class))));
     }
 
     private static void assertSecurityFields(SecurityResponse security)

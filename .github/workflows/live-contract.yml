@@ -1,0 +1,55 @@
+name: MOEX ISS live contract
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: moex-iss-live-contract
+  cancel-in-progress: true
+
+jobs:
+  contract-test:
+    runs-on: ${{ vars.MOEX_LIVE_RUNNER || 'ubuntu-latest' }}
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Java 21
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Check MOEX ISS availability
+        shell: bash
+        run: |
+          endpoint='https://iss.moex.com/iss/engines.json?iss.meta=off&iss.only=engines'
+          if ! curl --fail --silent --show-error --location \
+            --connect-timeout 5 --max-time 15 \
+            --retry 2 --retry-delay 2 --retry-all-errors \
+            --output /dev/null "$endpoint"; then
+            echo '::error title=MOEX ISS unavailable::Cannot connect to iss.moex.com from this runner. The API contract was not checked.'
+            exit 2
+          fi
+
+      - name: Verify live MOEX ISS contract
+        run: ./mvnw --batch-mode --no-transfer-progress clean verify -Plive-contract-tests
+
+      - name: Upload Failsafe reports
+        if: failure()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: moex-iss-live-contract-reports
+          path: target/failsafe-reports
+          if-no-files-found: warn
+          retention-days: 7

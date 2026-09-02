@@ -297,6 +297,13 @@
             <sourceFileExclude>**/utils/*.java</sourceFileExclude>
           </sourceFileExcludes>
         </configuration>
+        <reportSets>
+          <reportSet>
+            <reports>
+              <report>javadoc</report>
+            </reports>
+          </reportSet>
+        </reportSets>
       </plugin>
       <plugin>
         <groupId>org.jacoco</groupId>

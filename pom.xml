@@ -17,7 +17,7 @@
 
     <hc5.client.version>5.2.1</hc5.client.version>
     <junit.version>5.9.3</junit.version>
-    <slf4j.version>2.0.7</slf4j.version>
+    <slf4j.version>2.0.19</slf4j.version>
   </properties>
 
   <dependencies>

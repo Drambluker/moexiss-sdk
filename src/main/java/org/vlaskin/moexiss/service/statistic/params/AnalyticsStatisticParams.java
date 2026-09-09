@@ -17,6 +17,8 @@ public class AnalyticsStatisticParams extends BaseParams
     private Language language = DEFAULT_LANGUAGE;
     private int pageIndex = 0;
     private int limit = 20;
+    /** Точное смещение имеет приоритет над вычислением по номеру и размеру страницы. */
+    private Integer startIndex;
     private TradingSession tradingSession = DEFAULT_TRADING_SESSION;
     private LocalDate date;
     private String tickers;

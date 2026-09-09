@@ -101,7 +101,10 @@ public class StatisticService extends BaseService
 
         if (params.getLanguage() != null)
             requestBuilder.append("&lang=").append(params.getLanguage());
-        requestBuilder.append("&start=").append(params.getPageIndex() * params.getLimit());
+        int startIndex = params.getStartIndex() != null
+                ? params.getStartIndex()
+                : params.getPageIndex() * params.getLimit();
+        requestBuilder.append("&start=").append(startIndex);
         requestBuilder.append("&limit=").append(params.getLimit());
         if (params.getTradingSession() != null)
             requestBuilder.append("&tradingsession=").append(params.getTradingSession());

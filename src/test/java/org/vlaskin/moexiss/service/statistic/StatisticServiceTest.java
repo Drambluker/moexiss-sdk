@@ -3,6 +3,7 @@ package org.vlaskin.moexiss.service.statistic;
 import org.junit.jupiter.api.Test;
 import org.vlaskin.moexiss.FixtureTransport;
 import org.vlaskin.moexiss.MoexClient;
+import org.vlaskin.moexiss.entity.CursorResponse;
 import org.vlaskin.moexiss.entity.IndexAnalyticsDataResponse;
 import org.vlaskin.moexiss.params.TradingSession;
 import org.vlaskin.moexiss.service.statistic.params.AnalyticsStatisticParams;
@@ -35,5 +36,38 @@ class StatisticServiceTest
         assertEquals(12.5, analytics.getFirst().getDoubleFields()
                 .get(IndexAnalyticsDataResponse.Fields.WEIGHT));
         assertEquals(TradingSession.TOTAL, analytics.getFirst().getTradingSession());
+    }
+
+    @Test
+    void usesExplicitAnalyticsStartIndex() throws IOException
+    {
+        FixtureTransport transport = new FixtureTransport("analytics.json");
+        MoexClient client = new MoexClient("https://fixture.test", transport);
+        AnalyticsStatisticParams params = new AnalyticsStatisticParams("IMOEX");
+        params.setPageIndex(7);
+        params.setLimit(100);
+        params.setStartIndex(20);
+
+        client.getStatistics().getIndexAnalyticsData(params);
+
+        assertEquals("https://fixture.test/iss/statistics/engines/stock/markets/index/analytics/IMOEX.json"
+                + "?iss.meta=on&iss.only=analytics&lang=ru&start=20&limit=100&tradingsession=3",
+                transport.getRequestedUrl());
+    }
+
+    @Test
+    void deserializesAnalyticsCursor() throws IOException
+    {
+        FixtureTransport transport = new FixtureTransport("analytics.json");
+        MoexClient client = new MoexClient("https://fixture.test", transport);
+
+        List<CursorResponse> cursors = client.getStatistics()
+                .getIndexAnalyticsCursor(new AnalyticsStatisticParams("IMOEX"));
+
+        assertEquals(1, cursors.size());
+        CursorResponse cursor = cursors.getFirst();
+        assertEquals(0L, cursor.getLongFields().get(CursorResponse.Fields.INDEX));
+        assertEquals(46L, cursor.getLongFields().get(CursorResponse.Fields.TOTAL));
+        assertEquals(20L, cursor.getLongFields().get(CursorResponse.Fields.PAGE_SIZE));
     }
 }

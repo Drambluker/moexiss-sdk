@@ -10,5 +10,16 @@
     },
     "columns": ["indexid", "ticker", "tradedate", "trade_session_date", "tradingsession", "weight"],
     "data": [["IMOEX", "SBER", "2026-08-27", "2026-08-28", 3, 12.5]]
+  },
+  "analytics.cursor": {
+    "metadata": {
+      "INDEX": {"type": "int64"},
+      "TOTAL": {"type": "int64"},
+      "PAGESIZE": {"type": "int64"},
+      "PREV_DATE": {"type": "string"},
+      "NEXT_DATE": {"type": "undefined"}
+    },
+    "columns": ["INDEX", "TOTAL", "PAGESIZE", "PREV_DATE", "NEXT_DATE"],
+    "data": [[0, 46, 20, "2026-08-27", null]]
   }
 }

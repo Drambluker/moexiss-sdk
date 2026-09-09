@@ -3,8 +3,10 @@ package org.vlaskin.moexiss.live;
 import org.junit.jupiter.api.Test;
 import org.vlaskin.moexiss.MoexClient;
 import org.vlaskin.moexiss.entity.BoardResponse;
+import org.vlaskin.moexiss.entity.CursorResponse;
 import org.vlaskin.moexiss.entity.EngineResponse;
 import org.vlaskin.moexiss.entity.IndexAnalyticsDataResponse;
+import org.vlaskin.moexiss.entity.IndexAnalyticsResponse;
 import org.vlaskin.moexiss.entity.IndexResponse;
 import org.vlaskin.moexiss.entity.MarketResponse;
 import org.vlaskin.moexiss.entity.MarketDataResponse;
@@ -158,20 +160,28 @@ class MoexIssLiveContractIT
     void deserializesIndexAnalyticsContract() throws IOException
     {
         AnalyticsStatisticParams firstPageParams = new AnalyticsStatisticParams("IMOEX");
-        List<IndexAnalyticsDataResponse> firstPage = retryOnIoFailure(() ->
-                client.getStatistics().getIndexAnalyticsData(firstPageParams));
+        IndexAnalyticsResponse firstPage = retryOnIoFailure(() ->
+                client.getStatistics().getIndexAnalytics(firstPageParams));
+        CursorResponse cursor = firstPage.getCursors().stream()
+                .findFirst()
+                .orElseThrow(() -> new AssertionError("Курсор аналитики IMOEX отсутствует"));
+        long currentIndex = requiredCursorField(cursor, CursorResponse.Fields.INDEX);
+        long pageSize = requiredCursorField(cursor, CursorResponse.Fields.PAGE_SIZE);
+        long total = requiredCursorField(cursor, CursorResponse.Fields.TOTAL);
+        assertTrue(pageSize > 0);
+        assertTrue(total > pageSize);
 
         AnalyticsStatisticParams secondPageParams = new AnalyticsStatisticParams("IMOEX");
-        secondPageParams.setPageIndex(1);
+        secondPageParams.setStartIndex(Math.toIntExact(currentIndex + pageSize));
         List<IndexAnalyticsDataResponse> secondPage = retryOnIoFailure(() ->
                 client.getStatistics().getIndexAnalyticsData(secondPageParams));
 
-        assertFalse(firstPage.isEmpty());
+        assertFalse(firstPage.getData().isEmpty());
         assertFalse(secondPage.isEmpty());
-        firstPage.forEach(MoexIssLiveContractIT::assertAnalyticsFields);
+        firstPage.getData().forEach(MoexIssLiveContractIT::assertAnalyticsFields);
         secondPage.forEach(MoexIssLiveContractIT::assertAnalyticsFields);
 
-        Set<String> firstPageCodes = firstPage.stream()
+        Set<String> firstPageCodes = firstPage.getData().stream()
                 .map(analytics -> analytics.getStringFields()
                         .get(IndexAnalyticsDataResponse.Fields.SECURITY_CODE))
                 .collect(Collectors.toSet());
@@ -179,6 +189,13 @@ class MoexIssLiveContractIT
                 .map(analytics -> analytics.getStringFields()
                         .get(IndexAnalyticsDataResponse.Fields.SECURITY_CODE))
                 .noneMatch(firstPageCodes::contains));
+    }
+
+    private static long requiredCursorField(CursorResponse cursor, CursorResponse.Fields field)
+    {
+        Long value = cursor.getLongFields().get(field);
+        assertNotNull(value);
+        return value;
     }
 
     private static void assertSecurityFields(SecurityResponse security)

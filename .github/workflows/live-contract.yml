@@ -1,6 +1,7 @@
 name: MOEX ISS live contract
 
 on:
+  workflow_call:
   schedule:
     - cron: '0 5 * * *'
   workflow_dispatch:
@@ -9,7 +10,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: moex-iss-live-contract
+  group: moex-iss-live-contract-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

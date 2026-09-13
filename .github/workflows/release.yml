@@ -73,7 +73,7 @@ jobs:
       - name: Verify project and run static analysis
         run: >-
           ./mvnw --batch-mode --no-transfer-progress clean verify
-          spotbugs:check cyclonedx:makeBom
+          spotbugs:check
 
       - name: Scan dependency SBOM
         uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0

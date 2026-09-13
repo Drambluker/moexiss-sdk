@@ -356,6 +356,19 @@
         <groupId>org.cyclonedx</groupId>
         <artifactId>cyclonedx-maven-plugin</artifactId>
         <version>${cyclonedx-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>generate-sbom</id>
+            <phase>package</phase>
+            <goals>
+              <goal>makeBom</goal>
+            </goals>
+            <configuration>
+              <projectType>library</projectType>
+              <outputFormat>json</outputFormat>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
     </plugins>
   </build>

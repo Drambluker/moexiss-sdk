@@ -6,7 +6,7 @@
 
   <groupId>org.vlaskin.moex</groupId>
   <artifactId>moex-iss</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <name>MOEX ISS SDK</name>
   <description>Java client for the Moscow Exchange ISS API</description>

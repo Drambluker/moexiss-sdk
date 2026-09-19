@@ -10,7 +10,9 @@ This repository is a Java 21 Maven library for the MOEX ISS API. Production code
 - `./mvnw test` runs the fast JUnit test suite without the full verification lifecycle.
 - `./mvnw clean verify -Plive-contract-tests` also runs `*IT` tests against `iss.moex.com`; use only when network access is available.
 - `./mvnw spotbugs:check` runs the configured maximum-effort SpotBugs analysis.
-- `./mvnw clean verify site` generates Javadocs, reports, and the Maven Site in `docs/`.
+- `./mvnw clean verify site` generates Javadocs, reports, and the Russian Maven Site in `target/site/ru/`.
+
+Root README and RELEASING Markdown files are the only prose sources for the site. Verify builds the site for pull requests; Pages publishes only from main, including manual runs. Do not commit generated HTML.
 
 Use the checked-in Maven wrapper. The build enforces Java 21 and Maven 3.9.5 or newer.
 

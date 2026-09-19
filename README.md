@@ -71,3 +71,5 @@ Double last = marketData.get(MarketDataResponse.Fields.LAST, Double.class);
 
 - [Maven Site и Javadoc](https://drambluker.github.io/moexiss-sdk/)
 - [Выпуск, удаление и восстановление версий](RELEASING.md)
+
+Локальный сайт после `./mvnw clean verify site` — `target/site/ru/index.html`.

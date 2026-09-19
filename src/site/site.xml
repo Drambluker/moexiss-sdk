@@ -9,20 +9,16 @@
     <skin>
         <groupId>org.apache.maven.skins</groupId>
         <artifactId>maven-fluido-skin</artifactId>
-        <version>1.7</version>
+        <version>2.1.0</version>
     </skin>
     <body>
         <links>
-            <item name="English" href="${project.url}" />
-            <item name="На русском" href="${project.url}/ru" />
             <item name="GitHub" href="https://github.com/Drambluker/moexiss-sdk" />
         </links>
+        <menu name="Документация">
+            <item name="Главная" href="index.html"/>
+            <item name="Релизы" href="RELEASING.html"/>
+        </menu>
         <menu ref="reports" />
     </body>
-    <custom>
-        <fluidoSkin>
-            <topBarEnabled>true</topBarEnabled>
-            <sideBarEnabled>false</sideBarEnabled>
-        </fluidoSkin>
-    </custom>
 </site>

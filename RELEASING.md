@@ -71,6 +71,26 @@ runner с меткой `moex-access` и создайте repository variable
 `MOEX_LIVE_RUNNER=moex-access`. Удаление переменной возвращает workflow на
 `ubuntu-latest`.
 
+## Сайт документации
+
+1. В `Settings → Pages → Build and deployment → Source` выберите `GitHub Actions`.
+2. В `Settings → Environments → github-pages → Deployment branches and tags`
+   выберите `Selected branches and tags` и разрешите только правило типа
+   `Branch` с именем `main`. Это ограничивает deployment независимо от workflow.
+3. Отправьте изменения в `main` или запустите `Publish Maven site` вручную,
+   выбрав `main`. Проверьте задания `build` и `deploy`; при необходимости
+   подтвердите deployment в environment.
+
+Сайт публикуется по адресу `https://drambluker.github.io/moexiss-sdk/`.
+Он отражает текущую `main`, включая невыпущенные изменения, и не публикует
+Maven-пакеты. Ручной запуск из другой ветки или тега пропускает оба задания;
+в pull request сайт только собирается в рамках `Verify / test`.
+Отдельный PAT для Pages не требуется.
+
+Локальная проверка: `./mvnw clean verify site`, затем откройте
+`target/site/ru/index.html`. Текст берётся из README и этого файла,
+JavaDoc и покрытие генерируются автоматически. Не редактируйте и не коммитьте HTML.
+
 ## Удаление и восстановление
 
 > **Только для крайнего случая.** Удаление публичной версии может сломать чужие

@@ -180,8 +180,7 @@
           <artifactId>maven-site-plugin</artifactId>
           <version>3.22.0</version>
           <configuration>
-            <locales>default,ru</locales>
-            <outputDirectory>${basedir}/docs</outputDirectory>
+            <locales>ru</locales>
           </configuration>
         </plugin>
         <plugin>
@@ -208,6 +207,33 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>prepare-site-markdown</id>
+            <phase>pre-site</phase>
+            <goals><goal>run</goal></goals>
+            <configuration>
+              <target>
+                <!-- Корневые Markdown-файлы остаются единственным источником текста. -->
+                <copy file="${project.basedir}/README.md"
+                      tofile="${project.build.directory}/generated-site/ru/markdown/index.md" encoding="UTF-8">
+                  <filterchain>
+                    <replacestring from="](RELEASING.md)" to="](RELEASING.html)"/>
+                  </filterchain>
+                </copy>
+                <copy file="${project.basedir}/RELEASING.md"
+                      tofile="${project.build.directory}/generated-site/ru/markdown/RELEASING.md" encoding="UTF-8"/>
+                <copy todir="${project.reporting.outputDirectory}/ru">
+                  <fileset dir="${project.basedir}" includes="LICENSE,NOTICE"/>
+                </copy>
+              </target>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <artifactId>maven-enforcer-plugin</artifactId>
         <version>3.6.3</version>
@@ -374,6 +400,7 @@
   </build>
 
   <reporting>
+    <excludeDefaults>true</excludeDefaults>
     <plugins>
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>

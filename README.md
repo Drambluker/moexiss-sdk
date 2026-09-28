@@ -18,7 +18,7 @@ Java 21 SDK для [MOEX ISS API](https://iss.moex.com/iss/reference/), не
 <dependency>
   <groupId>org.vlaskin.moex</groupId>
   <artifactId>moex-iss</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 

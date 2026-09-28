@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.vlaskin.moexiss.http.ApacheMoexHttpTransport;
 import org.vlaskin.moexiss.http.MoexHttpTransport;
 import org.vlaskin.moexiss.service.BaseService;
+import org.vlaskin.moexiss.service.history.HistoryService;
 import org.vlaskin.moexiss.service.dictionary.DictionaryService;
 import org.vlaskin.moexiss.service.engine.EngineService;
 import org.vlaskin.moexiss.service.security.SecurityService;
@@ -22,6 +23,7 @@ public final class MoexClient
     private final DictionaryService dictionaries;
     private final EngineService engines;
     private final StatisticService statistics;
+    private final HistoryService history;
 
     /** Создаёт клиент для официального адреса MOEX ISS со стандартным HTTP-транспортом. */
     public MoexClient()
@@ -56,5 +58,6 @@ public final class MoexClient
         dictionaries = new DictionaryService(baseUrl, httpTransport);
         engines = new EngineService(baseUrl, httpTransport);
         statistics = new StatisticService(baseUrl, httpTransport);
+        history = new HistoryService(baseUrl, httpTransport);
     }
 }

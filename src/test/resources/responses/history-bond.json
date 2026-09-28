@@ -1,0 +1,17 @@
+{
+"history": {
+	"columns": ["BOARDID", "TRADEDATE", "SHORTNAME", "SECID", "NUMTRADES", "VALUE", "LOW", "HIGH", "CLOSE", "LEGALCLOSEPRICE", "ACCINT", "WAPRICE", "YIELDCLOSE", "OPEN", "VOLUME", "MARKETPRICE2", "MARKETPRICE3", "ADMITTEDQUOTE", "MP2VALTRD", "MARKETPRICE3TRADESVALUE", "ADMITTEDVALUE", "MATDATE", "DURATION", "YIELDATWAP", "IRICPICLOSE", "BEICLOSE", "COUPONPERCENT", "COUPONVALUE", "BUYBACKDATE", "LASTTRADEDATE", "FACEVALUE", "CURRENCYID", "CBRCLOSE", "YIELDTOOFFER", "YIELDLASTCOUPON", "OFFERDATE", "FACEUNIT", "TRADINGSESSION", "CALLOPTIONDATE", "CALLOPTIONYIELD", "CALLOPTIONDURATION", "PUTOPTIONDATE", "DATEYIELDFROMISSUER", "TRADE_SESSION_DATE", "ZSPREAD", "ZSPREADATWAPRICE", "BONDTYPE", "BONDSUBTYPE", "COUPON_DETAILS", "FACEVALUE_TYPE"],
+	"data": [
+		["TQOB", "2025-09-22", "ОФЗ 26238", "SU26238RMFS4", 21613, 1707370806.7, 58.082, 58.699, 58.54, 58.5, 21.4, 58.514, 14, 58.489, 2918476, 58.51, 58.51, null, 1597474382.18, 1597474382.18, null, "2041-05-15", 2744, 14, null, null, 7.1, 35.4, null, "2025-09-22", 1000, "SUR", null, null, null, null, "RUB", 3, null, null, null, null, null, "2025-09-22", null, null, null, null, "Фиксированный с известными купонами", "Фиксированный"],
+		["TQOB", "2025-09-23", "ОФЗ 26238", "SU26238RMFS4", 19181, 2496027499.03, 57.687, 58.687, 57.8, 58.13, 21.59, 58.177, 14.18, 58.54, 4290382, 58.193, 58.193, null, 2270907065.93, 2270907065.93, null, "2041-05-15", 2734, 14.09, null, null, 7.1, 35.4, null, "2025-09-23", 1000, "SUR", null, null, null, null, "RUB", 3, null, null, null, null, null, "2025-09-23", null, null, null, null, "Фиксированный с известными купонами", "Фиксированный"],
+		["TQOB", "2025-09-24", "ОФЗ 26238", "SU26238RMFS4", 30219, 2143389867.42, 57.319, 58.217, 57.434, 57.56, 21.78, 57.627, 14.28, 57.916, 3719390, 57.641, 57.641, null, 1851358731.8, 1851358731.8, null, "2041-05-15", 2719, 14.23, null, null, 7.1, 35.4, null, "2025-09-24", 1000, "SUR", null, null, null, null, "RUB", 3, null, null, null, null, null, "2025-09-24", null, null, null, null, "Фиксированный с известными купонами", "Фиксированный"],
+		["TQOB", "2025-09-25", "ОФЗ 26238", "SU26238RMFS4", 23244, 1285833228.34, 56.708, 57.648, 56.901, 56.94, 21.98, 56.981, 14.42, 57.435, 2256603, 56.984, 56.984, null, 1134783790.14, 1134783790.14, null, "2041-05-15", 2701, 14.4, null, null, 7.1, 35.4, null, "2025-09-25", 1000, "SUR", null, null, null, null, "RUB", 3, null, null, null, null, null, "2025-09-25", null, null, null, null, "Фиксированный с известными купонами", "Фиксированный"],
+		["TQOB", "2025-09-26", "ОФЗ 26238", "SU26238RMFS4", 17103, 965020971.65, 56.684, 57.144, 56.924, 57, 22.17, 56.909, 14.41, 56.901, 1695716, 56.915, 56.915, null, 879586592.35, 879586592.35, null, "2041-05-15", 2696, 14.42, null, null, 7.1, 35.4, null, "2025-09-26", 1000, "SUR", null, null, null, null, "RUB", 3, null, null, null, null, null, "2025-09-26", null, null, null, null, "Фиксированный с известными купонами", "Фиксированный"]
+	]
+},
+"history.cursor": {
+	"columns": ["INDEX", "TOTAL", "PAGESIZE"],
+	"data": [
+		[0, 5, 100]
+	]
+}}

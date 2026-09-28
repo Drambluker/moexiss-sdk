@@ -1,0 +1,7 @@
+{
+"splits": {
+	"columns": ["tradedate", "secid", "before", "after"],
+	"data": [
+		["2024-04-08", "GMKN", 1, 100]
+	]
+}}

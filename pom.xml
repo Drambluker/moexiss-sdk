@@ -6,7 +6,7 @@
 
   <groupId>org.vlaskin.moex</groupId>
   <artifactId>moex-iss</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.1.0</version>
 
   <name>MOEX ISS SDK</name>
   <description>Java client for the Moscow Exchange ISS API</description>
@@ -37,7 +37,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.build.outputTimestamp>2026-09-10T07:00:00Z</project.build.outputTimestamp>
+    <project.build.outputTimestamp>2026-09-28T00:00:00Z</project.build.outputTimestamp>
     <maven.compiler.release>21</maven.compiler.release>
 
     <commons-lang3.version>3.20.0</commons-lang3.version>

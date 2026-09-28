@@ -18,7 +18,7 @@ Java 21 SDK для [MOEX ISS API](https://iss.moex.com/iss/reference/), не
 <dependency>
   <groupId>org.vlaskin.moex</groupId>
   <artifactId>moex-iss</artifactId>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
@@ -30,7 +30,7 @@ Java 21 SDK для [MOEX ISS API](https://iss.moex.com/iss/reference/), не
 ## Использование
 
 `MoexClient` предоставляет сервисы инструментов, справочников, торговых систем
-и статистики:
+и статистики, а также исторических данных:
 
 ```java
 MoexClient client = new MoexClient();
@@ -47,6 +47,25 @@ List<SecurityResponse> securities = client.getSecurities().getList(params);
 ```java
 Double last = marketData.get(MarketDataResponse.Fields.LAST, Double.class);
 ```
+
+### Исторические данные
+
+```java
+HistoryQuery query = new HistoryQuery("stock", "shares", "TQBR", "SBER",
+    LocalDate.of(2025, 9, 22), LocalDate.of(2025, 9, 26), 0);
+HistoryPage<SecurityHistoryRow> page = client.getHistory().getSecurityHistory(query);
+```
+
+Типы запросов и результатов находятся в `org.vlaskin.moexiss.service.history`.
+Методы читают одну страницу; если `page.complete()` равно `false`, следующий
+`start` равен `page.start() + page.rows().size()`. История индексов доступна
+через `getIndexHistory`. Некорректные таблицы и курсоры отклоняются; отсутствующая
+цена остаётся `null`, а не заменяется нулём.
+
+`getCorporateActions` возвращает справочник дроблений, не полное покрытие всех
+корпоративных событий. `getDistributions` возвращает `UNSUPPORTED`: достоверный
+полный источник выплат пока не подтверждён. Отсутствие данных не означает,
+что событий или выплат не было. Методика индекса и доходность SDK не вычисляются.
 
 Стандартный HTTP-транспорт использует тайм-ауты подключения и ответа 10 и 30
 секунд. Другие значения или собственный транспорт можно передать в конструктор

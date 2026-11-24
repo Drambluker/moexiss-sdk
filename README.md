@@ -40,6 +40,12 @@ params.setQuery("SBER");
 List<SecurityResponse> securities = client.getSecurities().getList(params);
 ```
 
+Стандартный транспорт `MoexClient` использует настройки TLS JVM приложения.
+Если при обращении к MOEX ISS возникает `PKIX path building failed`, проверьте,
+какое хранилище доверенных CA использует JVM приложения. Для цепочки Минцифры добавьте
+официальный корневой сертификат в это хранилище.
+[Источник сертификата и его отпечаток](#moex-live-contract)
+
 Основные поля доступны через предметные getters, например
 `security.getCode()` и `security.getLotSize()`. Остальные поля читаются с
 проверкой типа:
@@ -80,15 +86,47 @@ HistoryPage<SecurityHistoryRow> page = client.getHistory().getSecurityHistory(qu
 
 ```bash
 ./mvnw clean verify
-./mvnw clean verify -Plive-contract-tests
 ./mvnw clean verify site
 ```
 
-Обычные тесты используют локальные снимки ответов MOEX. Профиль
-`live-contract-tests` обращается к реальному API и требует сетевого доступа к
-`iss.moex.com`.
+Обычные тесты используют локальные снимки ответов MOEX.
+[Контрактные тесты](#moex-live-contract) обращаются к реальному API и требуют
+сетевого доступа к `iss.moex.com`.
 
 - [Maven Site и Javadoc](https://drambluker.github.io/moexiss-sdk/)
 - [Выпуск, удаление и восстановление версий](RELEASING.md)
 
 Локальный сайт после `./mvnw clean verify site` — `target/site/ru/index.html`.
+
+<a name="moex-live-contract"></a>
+
+### Локальный запуск контрактных тестов MOEX ISS
+
+Если JDK доверяет цепочке MOEX ISS, достаточно `./mvnw clean verify -Plive-contract-tests`.
+При ошибке `PKIX path building failed` выполните в Bash из корня репозитория следующий
+блок с `JAVA_HOME`, указывающим на JDK 21. Он добавляет корневой сертификат Минцифры
+во временную копию хранилища JDK и передаёт её только JVM контрактных тестов.
+
+```bash
+(
+  set -e
+  trust_dir=$(mktemp -d)
+  trap 'rm -rf -- "$trust_dir"' EXIT
+  trust_store="$trust_dir/cacerts"
+  cp "$JAVA_HOME/lib/security/cacerts" "$trust_store"
+  chmod u+w "$trust_store"
+  "$JAVA_HOME/bin/keytool" -importcert -noprompt \
+    -alias russian-trusted-root-ca -file vendor/certs/russian-trusted-root-ca.pem \
+    -keystore "$trust_store" -storepass changeit
+
+  trust_options="-Djavax.net.ssl.trustStore=\"$trust_store\""
+  trust_options+=" -Djavax.net.ssl.trustStoreType=PKCS12 -Djavax.net.ssl.trustStorePassword=changeit"
+  ./mvnw clean verify -Plive-contract-tests \
+    "-Dmoex.live.jvmArgs=$trust_options"
+)
+```
+
+Для ротации скачайте PEM из официального источника, сверьте SHA‑256 и проверьте
+live-контракт. Отпечаток текущего сертификата
+`D26D2D0231B7C39F92CC738512BA54103519E4405D68B5BD703E9788CA8ECF31`.
+[Официальный сертификат Минцифры](https://gu-st.ru/content/lending/russian_trusted_root_ca_pem.crt)

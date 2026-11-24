@@ -14,7 +14,7 @@
 2. Обновите примеры версии в документации.
 3. Запустите `./mvnw clean verify spotbugs:check cyclonedx:makeBom`.
    При доступном MOEX ISS дополнительно выполните
-   `./mvnw clean verify -Plive-contract-tests`.
+   [локальную проверку live-контракта](README.md#moex-live-contract).
 4. Создайте отдельный коммит, например
    `git commit -am "[release] Prepare 1.1.0"`, и отправьте его в `main`.
 5. Дождитесь успешного завершения обязательных проверок.
@@ -70,6 +70,15 @@ alerts, Dependabot security updates, Secret scanning и Push protection. Для
 runner с меткой `moex-access` и создайте repository variable
 `MOEX_LIVE_RUNNER=moex-access`. Удаление переменной возвращает workflow на
 `ubuntu-latest`.
+
+Если self-hosted runner использует собственное хранилище доверенных CA,
+задайте в окружении службы раннера `MOEX_LIVE_TRUST_STORE` с абсолютным путём
+к файлу JKS или PKCS12. Для хранилища с паролем, отличным от `changeit`, задайте
+`MOEX_LIVE_TRUST_STORE_PASSWORD_FILE` с абсолютным путём к доступному службе
+защищённому файлу с паролем в первой строке. Workflow переносит сертификаты
+из этого хранилища во временную копию, добавляет корневой CA Минцифры и передаёт
+результат JVM контрактных тестов. Если путь к хранилищу не задан, workflow
+использует стандартный `cacerts` JDK.
 
 ## Сайт документации
 

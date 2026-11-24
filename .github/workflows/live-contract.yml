@@ -17,6 +17,8 @@ jobs:
   contract-test:
     runs-on: ${{ vars.MOEX_LIVE_RUNNER || 'ubuntu-latest' }}
     timeout-minutes: 10
+    env:
+      MOEX_CA_CERT: vendor/certs/russian-trusted-root-ca.pem
 
     steps:
       - name: Check out repository
@@ -35,16 +37,52 @@ jobs:
         shell: bash
         run: |
           endpoint='https://iss.moex.com/iss/engines.json?iss.meta=off&iss.only=engines'
-          if ! curl --fail --silent --show-error --location \
-            --connect-timeout 5 --max-time 15 \
-            --retry 2 --retry-delay 2 --retry-all-errors \
-            --output /dev/null "$endpoint"; then
+          check_availability() {
+            curl --fail --silent --show-error --location \
+              --connect-timeout 5 --max-time 15 \
+              --retry 2 --retry-delay 2 --retry-all-errors \
+              --output /dev/null "$@" "$endpoint"
+          }
+
+          status=0
+          check_availability || status=$?
+          if [[ "$status" == 60 ]]; then
+            status=0
+            check_availability --cacert "$MOEX_CA_CERT" || status=$?
+          fi
+          if [[ "$status" != 0 ]]; then
             echo '::error title=MOEX ISS unavailable::Cannot connect to iss.moex.com from this runner. The API contract was not checked.'
             exit 2
           fi
 
       - name: Verify live MOEX ISS contract
-        run: ./mvnw --batch-mode --no-transfer-progress clean verify -Plive-contract-tests
+        shell: bash
+        run: |
+          trust_dir=$(mktemp -d "$RUNNER_TEMP/moex-trust.XXXXXX")
+          trap 'rm -rf -- "$trust_dir"' EXIT
+          trust_store="$trust_dir/cacerts"
+
+          if [[ -n "${MOEX_LIVE_TRUST_STORE:-}" ]]; then
+            source_password=(-srcstorepass changeit)
+            if [[ -n "${MOEX_LIVE_TRUST_STORE_PASSWORD_FILE:-}" ]]; then
+              source_password=(-srcstorepass:file "$MOEX_LIVE_TRUST_STORE_PASSWORD_FILE")
+            fi
+            "$JAVA_HOME/bin/keytool" -importkeystore -noprompt \
+              -srckeystore "$MOEX_LIVE_TRUST_STORE" "${source_password[@]}" \
+              -destkeystore "$trust_store" -deststoretype PKCS12 -deststorepass changeit
+          else
+            cp "$JAVA_HOME/lib/security/cacerts" "$trust_store"
+            chmod u+w "$trust_store"
+          fi
+
+          "$JAVA_HOME/bin/keytool" -importcert -noprompt \
+            -alias "russian-trusted-root-ca-${trust_dir##*.}" -file "$MOEX_CA_CERT" \
+            -keystore "$trust_store" -storepass changeit
+
+          trust_options="-Djavax.net.ssl.trustStore=\"$trust_store\""
+          trust_options+=" -Djavax.net.ssl.trustStoreType=PKCS12 -Djavax.net.ssl.trustStorePassword=changeit"
+          ./mvnw --batch-mode --no-transfer-progress clean verify -Plive-contract-tests \
+            "-Dmoex.live.jvmArgs=$trust_options"
 
       - name: Upload Failsafe reports
         if: failure()

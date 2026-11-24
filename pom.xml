@@ -225,7 +225,11 @@
                   </filterchain>
                 </copy>
                 <copy file="${project.basedir}/RELEASING.md"
-                      tofile="${project.build.directory}/generated-site/ru/markdown/RELEASING.md" encoding="UTF-8"/>
+                      tofile="${project.build.directory}/generated-site/ru/markdown/RELEASING.md" encoding="UTF-8">
+                  <filterchain>
+                    <replacestring from="](README.md#moex-live-contract)" to="](index.html#moex-live-contract)"/>
+                  </filterchain>
+                </copy>
                 <copy todir="${project.reporting.outputDirectory}/ru">
                   <fileset dir="${project.basedir}" includes="LICENSE,NOTICE"/>
                 </copy>
@@ -442,12 +446,16 @@
   <profiles>
     <profile>
       <id>live-contract-tests</id>
+      <properties>
+        <moex.live.jvmArgs></moex.live.jvmArgs>
+      </properties>
       <build>
         <plugins>
           <plugin>
             <artifactId>maven-failsafe-plugin</artifactId>
             <version>3.6.1</version>
             <configuration>
+              <argLine>@{argLine} ${moex.live.jvmArgs}</argLine>
               <failIfNoTests>true</failIfNoTests>
             </configuration>
             <executions>
